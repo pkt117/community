@@ -1,0 +1,8 @@
+/* margin, padding */
+@value smallMargin: 1rem;
+@value mediumMargin: 2rem;
+@value largeMargin: 3rem;
+
+/* font-size */
+@value smallFontSize: 0.9rem;
+@value mediumFontSize: 1.5rem;

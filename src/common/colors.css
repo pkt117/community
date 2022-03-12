@@ -1,0 +1,7 @@
+/* header 컬러 */
+@value colorHeader: #f5f5f5;
+@value colorHeaderHover: #e0e0e0;
+
+/* navbar 컬러 */
+@value colorNavbar: #fafafa;
+@value colorNavbarLine: #424242;

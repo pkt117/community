@@ -1,0 +1,33 @@
+@value colorHeader, colorHeaderHover from "../../common/colors.css";
+@value largeMargin, mediumMargin, smallMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+
+.header {
+  position: sticky;
+  width: 100%;
+  background-color: colorHeader;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-left: mediumMargin;
+
+  font-size: smallFontSize;
+}
+
+.button {
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  margin-right: mediumMargin;
+  cursor: pointer;
+}
+
+.authIcon {
+  font-size: calc(smallFontSize * 1.2);
+  transition: transform 200ms ease-in-out;
+}
+
+.button:hover .authIcon {
+  transform: scale(1.1);
+}

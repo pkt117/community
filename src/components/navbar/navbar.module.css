@@ -1,0 +1,26 @@
+@value colorNavbar, colorNavbarLine from "../../common/colors.css";
+@value mediumMargin, smallMargin, smallFontSize from "../../common/size.css";
+
+.navbar {
+  width: 100%;
+  display: flex;
+  background-color: colorNavbar;
+}
+
+.link {
+  text-decoration: none;
+  color: colorNavbarLine;
+  padding: mediumMargin mediumMargin smallMargin mediumMargin;
+  font-size: smallFontSize;
+  cursor: pointer;
+}
+
+.active::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: calc(smallMargin / 2);
+  margin-bottom: 0;
+  background-color: colorNavbarLine;
+}
