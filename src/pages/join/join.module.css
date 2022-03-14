@@ -1,7 +1,7 @@
-@value colorLightGrey, colorPlaceholder, colorFocus, colorAuthButton, colorWhite, colorTest, colorGoogle from "../../common/colors.css";
+@value colorLightGrey, colorPlaceholder, colorFocus, colorWhite, colorAuthButton from "../../common/colors.css";
 @value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
 
-.login {
+.join {
   width: 100%;
   height: 100%;
   display: flex;
@@ -66,6 +66,18 @@
   color: colorFocus;
 }
 
+.checkTrue {
+  display: block;
+  position: absolute;
+  margin-top: microMargin;
+  color: colorFocus;
+  font-size: calc(smallFontSize / 2);
+}
+
+.checkFalse {
+  display: none;
+}
+
 .button {
   width: 60%;
   border: 0;
@@ -85,88 +97,4 @@
 .disabled {
   opacity: 0.5;
   pointer-events: none;
-}
-
-.join {
-  margin-top: smallMargin;
-  width: 60%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.join__item {
-  margin-left: smallMargin;
-  font-size: smallFontSize;
-  color: colorPlaceholder;
-  cursor: pointer;
-}
-
-.join__item:hover {
-  color: colorFocus;
-}
-
-.sns {
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: mediumMargin;
-}
-
-.sns__line {
-  width: 100%;
-  height: 0.1px;
-  background-color: colorPlaceholder;
-}
-
-.sns__text {
-  padding: 0 microMargin;
-  font-size: calc(smallFontSize * 0.8);
-  white-space: nowrap;
-  color: colorPlaceholder;
-}
-
-.etc {
-  width: 60%;
-  margin-top: microMargin;
-  display: flex;
-  flex-direction: column;
-}
-
-.etc__login {
-  width: 100%;
-  padding: microMargin;
-  border: 0;
-  outline: 0;
-  margin-bottom: microMargin;
-  position: relative;
-  border-radius: microMargin;
-  cursor: pointer;
-}
-
-.etc__login:hover {
-  opacity: 0.8;
-}
-
-.etc__google {
-  background-color: colorGoogle;
-}
-
-.etc__test {
-  background-color: colorTest;
-}
-
-.etc__icon {
-  color: colorWhite;
-  font-size: calc(smallFontSize * 1.2);
-  margin-left: microMargin;
-  position: absolute;
-  left: microMargin;
-}
-
-.etc__text {
-  display: block;
-  width: 100%;
-  margin: auto;
-  color: colorWhite;
 }

@@ -1,4 +1,5 @@
 /* margin, padding */
+@value microMargin: 0.5rem;
 @value smallMargin: 1rem;
 @value mediumMargin: 2rem;
 @value largeMargin: 3rem;

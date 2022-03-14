@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "./header.module.css";
 import { AiOutlineUnlock, AiOutlineLock } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import { clickLogin } from "../../redux/navigation/actions";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
-  const path = useSelector((state) => state.navigationReducer.path);
   const authState = useSelector((state) => state.authStateReducer.currentState);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const clickLoginButton = () => {
     if (authState === "login") {
     } else if (authState === "logout") {
-      dispatch(clickLogin());
+      navigate("/login");
     }
   };
 

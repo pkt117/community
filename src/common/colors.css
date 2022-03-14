@@ -5,3 +5,21 @@
 /* navbar 컬러 */
 @value colorNavbar: #fafafa;
 @value colorNavbarLine: #424242;
+
+/* login & join 컬러 */
+@value colorPlaceholder: #aaa;
+@value colorFocus: #ff7043;
+@value colorAuthButton: #33b49e;
+@value colorGoogle: #5086f8;
+@value colorTest: #323a45;
+
+/* loading 컬러 */
+@value colorLoading: #e0e0e099;
+
+/* colors */
+@value colorLightGrey: #ccc;
+@value colorWhite: #fff;
+@value colorBlack: #000;
+
+/* box-shadow */
+@value colorShadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
