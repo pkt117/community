@@ -1,12 +1,13 @@
 import { LOGIN, LOGOUT } from "./types";
 
-export const clickLogin = () => {
+export const stateLogin = (userInfo) => {
   return {
     type: LOGIN,
+    payload: userInfo,
   };
 };
 
-export const clickLogout = () => {
+export const stateLogout = () => {
   return {
     type: LOGOUT,
   };

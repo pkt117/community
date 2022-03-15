@@ -72,6 +72,7 @@
   margin-top: microMargin;
   color: colorFocus;
   font-size: calc(smallFontSize / 2);
+  font-weight: bold;
 }
 
 .checkFalse {

@@ -2,6 +2,7 @@ import { LOGIN, LOGOUT } from "./types";
 
 const initialState = {
   currentState: "logout",
+  userInfo: null,
 };
 
 const authStateReducer = (state = initialState, action) => {
@@ -10,11 +11,13 @@ const authStateReducer = (state = initialState, action) => {
       return {
         ...state,
         currentState: "login",
+        userInfo: action.payload,
       };
     case LOGOUT:
       return {
         ...state,
         currentState: "logout",
+        userInfo: null,
       };
 
     default:

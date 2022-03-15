@@ -63,7 +63,11 @@ const Join = ({ authService, dbService }) => {
     const name = nameRef.current.value;
 
     setLoading(true);
-    const { value: userJoin, result } = await authService.join(email, password);
+    const { value: userJoin, result } = await authService.join(
+      email,
+      password,
+      name
+    );
 
     if (result === "error" && userJoin === "auth/email-already-in-use") {
       setLoading(false);
@@ -72,7 +76,7 @@ const Join = ({ authService, dbService }) => {
       setLoading(false);
       alert(userJoin);
     } else if (result === "success") {
-      await dbService.userRegister(userJoin, email, name);
+      await dbService.userRegister(userJoin, email, name, "email");
       setLoading(false);
       navigate("/login");
     }

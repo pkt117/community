@@ -12,4 +12,5 @@
   background-color: colorWhite;
   box-shadow: colorShadow;
   font-family: "suncheonR", "suncheonB";
+  position: relative;
 }

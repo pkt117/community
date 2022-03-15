@@ -66,6 +66,18 @@
   color: colorFocus;
 }
 
+.checkMessage {
+  font-size: calc(smallFontSize * 0.9);
+  font-weight: bold;
+  color: colorFocus;
+  position: absolute;
+  margin-bottom: microMargin;
+}
+
+.disabledMessage {
+  display: none;
+}
+
 .button {
   width: 60%;
   border: 0;

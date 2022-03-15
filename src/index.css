@@ -17,11 +17,13 @@ code {
   font-family: "SuncheonB";
   font-style: normal;
   font-weight: bold;
+  font-display: block;
   src: url("fonts/SuncheonB.ttf");
 }
 @font-face {
   font-family: "SuncheonR";
   font-style: normal;
   font-weight: normal;
+  font-display: block;
   src: url("fonts/SuncheonR.ttf");
 }
