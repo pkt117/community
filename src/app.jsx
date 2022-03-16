@@ -1,27 +1,45 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./app.module.css";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { Login, FindGroup, MyGroup, MakeGroup, FreeBoard, Join } from "./pages";
+import {
+  Login,
+  FindGroup,
+  MyGroup,
+  CreateGroup,
+  FreeBoard,
+  Join,
+} from "./pages";
 import Header from "./components/header/header";
 import Navbar from "./components/navbar/navbar";
-import { useDispatch } from "react-redux";
-import { stateLogin } from "./redux/authState/actions";
+import Loading from "./components/loading/loading";
+import { useDispatch, useSelector } from "react-redux";
+import { loginCheck } from "./redux/authState/loginActions";
 
-function App({ authService, dbService }) {
+function App() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const { loadingState } = useSelector(({ loadingReducer }) => ({
+    loadingState: loadingReducer.loadingState,
+  }));
 
+  // 로그인 상태 체크
   useEffect(() => {
-    authService.onAuthChange((user) => {
-      const { email, displayName, uid } = user;
-      const userInfo = { email, displayName, uid };
-      dispatch(stateLogin(userInfo));
-    });
-  });
+    dispatch(loginCheck());
+  }, []);
+
+  //  로딩
+  useEffect(() => {
+    if (loadingState) setLoading(true);
+    else setLoading(false);
+  }, [loadingState]);
 
   return (
     <div className={styles.app}>
-      {location.pathname === "/login" || location.pathname === "/join" ? (
+      {loading && <Loading />}
+      {location.pathname === "/login" ||
+      location.pathname === "/join" ||
+      location.pathname === "/create_group" ? (
         <></>
       ) : (
         <>
@@ -32,15 +50,9 @@ function App({ authService, dbService }) {
 
       <Routes>
         <Route path="/" element={<MyGroup />} />
-        <Route
-          path="/login"
-          element={<Login authService={authService} dbService={dbService} />}
-        />
-        <Route
-          path="/join"
-          element={<Join authService={authService} dbService={dbService} />}
-        />
-        <Route path="/make_group" element={<MakeGroup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
+        <Route path="/create_group" element={<CreateGroup />} />
         <Route path="/find_group" element={<FindGroup />} />
         <Route path="/free_board" element={<FreeBoard />} />
       </Routes>

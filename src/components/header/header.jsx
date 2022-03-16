@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { AiOutlineUnlock, AiOutlineLock } from "react-icons/ai";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ConfirmPopup from "../confirm_popup/confirm_popup";
+import { logout } from "../../redux/authState/loginActions";
 
 const Header = (props) => {
-  const authState = useSelector((state) => state.authStateReducer.currentState);
+  const authState = useSelector((state) => state.loginReducer.currentState);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const clickLoginButton = () => {
     if (authState === "login") {
@@ -19,7 +21,8 @@ const Header = (props) => {
   };
 
   const confirmCheck = () => {
-    console.log("check");
+    dispatch(logout());
+    setConfirmOpen(false);
   };
   const confirmCancel = () => {
     setConfirmOpen(false);

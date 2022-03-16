@@ -13,6 +13,7 @@
   padding: mediumMargin mediumMargin smallMargin mediumMargin;
   font-size: smallFontSize;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .active::after {
@@ -23,4 +24,10 @@
   margin-top: calc(smallMargin / 2);
   margin-bottom: 0;
   background-color: colorNavbarLine;
+}
+
+@media screen and (max-width: 450px) {
+  .link {
+    font-size: calc(smallFontSize * 0.8);
+  }
 }

@@ -1,22 +1,28 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./join.module.css";
 import { MdEmail, MdPerson, MdPassword } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../components/loading/loading";
+import { useDispatch, useSelector } from "react-redux";
+import { userJoinAsync } from "../../redux/authState/joinActions";
 
-const Join = ({ authService, dbService }) => {
+const Join = () => {
   const [activeButton, setActiveButton] = useState(false);
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [passwordLength, setPasswordLength] = useState(false);
   const [emailCheck, setEmailCheck] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const emailRef = useRef();
   const passwordRef = useRef();
   const rePasswordRef = useRef();
   const nameRef = useRef();
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { error, joinState } = useSelector(({ joinReducer }) => ({
+    error: joinReducer.error,
+    joinState: joinReducer.joinState,
+  }));
+
   const checkEmail =
     /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
@@ -62,25 +68,15 @@ const Join = ({ authService, dbService }) => {
     const password = passwordRef.current.value;
     const name = nameRef.current.value;
 
-    setLoading(true);
-    const { value: userJoin, result } = await authService.join(
-      email,
-      password,
-      name
-    );
-
-    if (result === "error" && userJoin === "auth/email-already-in-use") {
-      setLoading(false);
-      setEmailCheck(true);
-    } else if (result === "error") {
-      setLoading(false);
-      alert(userJoin);
-    } else if (result === "success") {
-      await dbService.userRegister(userJoin, email, name, "email");
-      setLoading(false);
-      navigate("/login");
-    }
+    dispatch(userJoinAsync(email, password, name));
   };
+
+  //  회원가입 상태
+  useEffect(() => {
+    if (joinState === "success") navigate("/login");
+    else if (error === "auth/email-already-in-use") setEmailCheck(true);
+    else if (error !== null) alert(error);
+  }, [error, joinState]);
 
   return (
     <form className={styles.join}>
@@ -175,7 +171,6 @@ const Join = ({ authService, dbService }) => {
       >
         가입하기
       </button>
-      {loading && <Loading />}
     </form>
   );
 };

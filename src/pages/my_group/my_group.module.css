@@ -1,0 +1,30 @@
+@value smallMargin, mediumMargin, microMargin from "../../common/size.css";
+@value colorShadow, colorWhite, colorGroupButton from "../../common/colors.css";
+.myGroup {
+  width: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.myGroup::-webkit-scrollbar {
+  display: none;
+}
+
+.createGroup {
+  position: absolute;
+  bottom: mediumMargin;
+  right: mediumMargin;
+  border: 0;
+  padding: microMargin;
+  border-radius: microMargin;
+  cursor: pointer;
+  background-color: colorGroupButton;
+  color: colorWhite;
+  font-weight: bold;
+  box-shadow: colorShadow;
+}
+
+.createGroup:hover {
+  opacity: 0.8;
+}

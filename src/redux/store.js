@@ -1,9 +1,15 @@
 import { combineReducers } from "redux";
-import authStateReducer from "./authState/reducer";
+import loginReducer from "./authState/loginReducer";
+import joinReducer from "./authState/joinReducer";
+import loadingReducer from "./loading/reducer";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-const rootReducer = combineReducers({ authStateReducer });
+const rootReducer = combineReducers({
+  joinReducer,
+  loginReducer,
+  loadingReducer,
+});
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 

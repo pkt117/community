@@ -19,6 +19,9 @@
 /* popup 컬러 */
 @value colorPopupHeader: #e8f5e9;
 
+/* group & board 컬러 */
+@value colorGroupButton: #33b49e;
+
 /* colors */
 @value colorLightGrey: #ccc;
 @value colorWhite: #fff;

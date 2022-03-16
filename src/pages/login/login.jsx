@@ -1,19 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./login.module.css";
 import { MdEmail, MdPassword } from "react-icons/md";
 import { AiOutlineGoogle, AiFillSmile } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../components/loading/loading";
-import { stateLogin } from "../../redux/authState/actions";
+import {
+  emailLoginAsync,
+  googleLoginAsync,
+} from "../../redux/authState/loginActions";
 
-const Login = ({ authService, dbService }) => {
+const Login = () => {
   const [activeButton, setActiveButton] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [loginCheck, setLoginCheck] = useState(false);
   const emailRef = useRef();
   const passwordRef = useRef();
+
   const dispatch = useDispatch();
+  const { currentState, error } = useSelector(
+    ({ loadingReducer, loginReducer }) => ({
+      currentState: loginReducer.currentState,
+      error: loginReducer.error,
+    })
+  );
 
   const navigate = useNavigate();
 
@@ -30,46 +38,37 @@ const Login = ({ authService, dbService }) => {
     }
   };
 
+  // 이메일 로그인, 구글 로그인, 테스트 로그인
   const login = async (event, option) => {
     event.preventDefault();
-    let user;
-    setLoading(true);
 
     switch (option) {
       case "email":
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
 
-        user = await authService.defaultLogin(email, password);
+        dispatch(emailLoginAsync(email, password));
         break;
 
       case "google":
-        user = await authService.googleLogin();
-        await dbService.userRegister(
-          user.uid,
-          user.email,
-          user.displayName,
-          "google"
-        );
+        dispatch(googleLoginAsync());
         break;
-    }
 
-    if (user === "error") {
-      setLoading(false);
-      setLoginCheck(true);
-    } else {
-      const { email, displayName, uid } = user;
-      const userInfo = { email, displayName, uid };
-
-      dispatch(stateLogin(userInfo));
-      setLoading(false);
-      navigate("/");
+      case "test":
+        dispatch(emailLoginAsync("test@test.com", "xptmxm"));
+        break;
     }
   };
 
   const onJoin = () => {
     navigate("/join");
   };
+
+  //  로그인 상태
+  useEffect(() => {
+    if (currentState === "login") navigate("/");
+    else if (error) setLoginCheck(true);
+  }, [currentState, error]);
 
   return (
     <form className={styles.login}>
@@ -143,12 +142,14 @@ const Login = ({ authService, dbService }) => {
           <AiOutlineGoogle className={styles.etc__icon} />
           <span className={styles.etc__text}>구글 아이디로 시작하기</span>
         </button>
-        <button className={`${styles.etc__login} ${styles.etc__test}`}>
+        <button
+          className={`${styles.etc__login} ${styles.etc__test}`}
+          onClick={(event) => login(event, "test")}
+        >
           <AiFillSmile className={styles.etc__icon} />
           <span className={styles.etc__text}>로그인 없이 테스트</span>
         </button>
       </div>
-      {loading && <Loading />}
     </form>
   );
 };
