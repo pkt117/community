@@ -1,0 +1,17 @@
+@value microMargin from "../../common/size.css";
+@value colorSearchbar, colorWhite from "../../common/colors.css";
+
+.inputWrap {
+  padding: microMargin;
+  position: sticky;
+  background-color: colorWhite;
+  top: 0;
+}
+
+.input {
+  border: 0;
+  outline: 0;
+  background-color: colorSearchbar;
+  padding: microMargin;
+  width: 100%;
+}

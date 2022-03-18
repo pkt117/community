@@ -6,7 +6,7 @@ const Navbar = ({}) => {
   return (
     <nav className={styles.navbar}>
       <NavLink
-        to="/"
+        to="/my_group"
         className={({ isActive }) =>
           isActive ? `${styles.link} ${styles.active}` : styles.link
         }

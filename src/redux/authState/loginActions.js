@@ -3,6 +3,7 @@ import firebaseApp from "../../service/firebase";
 import AuthService from "../../service/authService";
 import DbService from "../../service/dbService";
 import { loadingStart, loadingFinish } from "../loading/actions";
+import { getMyGroupAsync } from "../board/actions";
 
 const authService = new AuthService(firebaseApp);
 const dbService = new DbService(firebaseApp);
@@ -48,12 +49,17 @@ export const emailLoginAsync = (email, password) => async (dispatch) => {
 
 // 로그인 상태 체크
 export const loginCheck = () => (dispatch) => {
-  authService.onAuthChange((user) => {
+  dispatch(loadingStart());
+  authService.onAuthChange(async (user) => {
     if (user != null) {
-      const { email, displayName, uid } = user;
+      const { email, displayName, uid } = await user;
       const userInfo = { email, displayName, uid };
 
+      dispatch(getMyGroupAsync());
+      dispatch(loadingFinish());
       return dispatch(loginSuccess(userInfo));
+    } else {
+      dispatch(loadingFinish());
     }
   });
 };

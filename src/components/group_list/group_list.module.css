@@ -1,0 +1,61 @@
+@value colorAreaText, colorFocus from "../../common/colors.css";
+@value smallMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+
+.list {
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  padding: smallMargin;
+}
+
+.imageWrap {
+  flex-basis: 25%;
+  height: 100%;
+  background: greenyellow;
+}
+
+.infoWrap {
+  flex-basis: 75%;
+  padding: microMargin;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: calc(smallFontSize * 1.3);
+  font-weight: bold;
+}
+
+.area {
+  display: flex;
+  align-items: center;
+}
+
+.area__icon,
+.area__text {
+  font-size: smallFontSize;
+  color: colorAreaText;
+}
+
+.area__text {
+  margin-left: calc(microMargin / 2);
+}
+
+.personnel {
+  display: flex;
+  align-items: center;
+}
+
+.personnel__icon,
+.personnel__text {
+  font-size: smallFontSize;
+}
+
+.personnel__text {
+  margin-left: calc(microMargin / 2);
+}
+
+.personnel__full {
+  color: colorFocus;
+}

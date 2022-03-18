@@ -42,11 +42,16 @@ export default class AuthService {
 
   // 로그인 상태 체크
   onAuthChange(onAuthChanged) {
-    const unsubscribe = onAuthStateChanged(this.auth, (user) => {
-      onAuthChanged(user);
+    const unsubscribe = onAuthStateChanged(this.auth, async (user) => {
+      await onAuthChanged(user);
     });
 
     return unsubscribe;
+  }
+
+  //  현재 유저의 uid 얻기
+  getUid() {
+    return this.auth.currentUser.uid;
   }
 
   logout() {

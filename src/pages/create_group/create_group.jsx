@@ -1,17 +1,123 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./create_group.module.css";
+import Select from "../../components/select_box/select_box";
+import AreaSearch from "../../components/search_popup/search_popup";
+import { useDispatch } from "react-redux";
+import { createGroupAsync } from "../../redux/board/actions";
+import { useNavigate } from "react-router-dom";
 
 const CreateGroup = (props) => {
+  const category = [
+    { value: "스터디" },
+    { value: "게임" },
+    { value: "취미" },
+    { value: "기타" },
+  ];
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [personnelSetting, setPersonnelSetting] = useState([]);
+  const [categoryValue, setCategoryValue] = useState(null);
+  const [areaValue, setAreaValue] = useState(null);
+  const [personnelValue, setPersonnelValue] = useState(null);
+  const [check, setCheck] = useState(false);
+  const [checkText, setCheckText] = useState("");
+  const nameRef = useRef();
+  const contentRef = useRef();
+
+  const getCategory = (value) => setCategoryValue(value);
+  const getArea = (value) => setAreaValue(value);
+  const getPersonnel = (value) =>
+    setPersonnelValue(parseInt(value.replace("명", "")));
+
+  const onClickButton = () => {
+    const name = nameRef.current.value;
+    const content = contentRef.current.value;
+
+    if (name.trim() === "") {
+      setCheck(true);
+      setCheckText("모임 이름을 입력해주세요");
+    } else if (categoryValue === null) {
+      setCheck(true);
+      setCheckText("카테고리를 선택해주세요");
+    } else if (personnelValue === null) {
+      setCheck(true);
+      setCheckText("모집인원을 선택해주세요");
+    } else {
+      const value = {
+        name,
+        category: categoryValue,
+        area: areaValue,
+        personnel: personnelValue,
+        content,
+      };
+      dispatch(createGroupAsync(value));
+      navigate("/my_group");
+    }
+  };
+
+  useEffect(() => {
+    if (personnelSetting == "") {
+      for (let i = 1; i <= 100; i++)
+        setPersonnelSetting((prev) => [...prev, { value: `${i}명` }]);
+    }
+  }, []);
   return (
     <div className={styles.createGroup}>
       <h1 className={styles.title}>모임 개설</h1>
       <div className={styles.wrap}>
         <h2 className={styles.input__title}>모임 이름</h2>
-        <input type="text" placeholder="모임 이름" />
+        <input
+          ref={nameRef}
+          type="text"
+          placeholder="모임 이름"
+          className={styles.input}
+        />
       </div>
 
       <div className={styles.wrap}>
         <h2 className={styles.input__title}>카테고리</h2>
+        <Select
+          options={category}
+          placeholder="카테고리 선택"
+          getSelectValue={getCategory}
+        />
+      </div>
+
+      <div className={styles.wrap}>
+        <h2 className={styles.input__title}>모임 지역</h2>
+        <AreaSearch getSelectValue={getArea} />
+      </div>
+
+      <div className={styles.wrap}>
+        <h2 className={styles.input__title}>모집 인원</h2>
+        <Select
+          options={personnelSetting}
+          placeholder="인원 선택"
+          getSelectValue={getPersonnel}
+        />
+      </div>
+
+      <div className={styles.contentWrap}>
+        <h2 className={styles.input__title}>모집 내용</h2>
+        <textarea
+          ref={contentRef}
+          className={styles.content}
+          placeholder="모임 내용을 적어주세요"
+        />
+      </div>
+      <div className={styles.buttonWrap}>
+        <p
+          className={
+            check ? `${styles.activeCheck} ${styles.check}` : styles.check
+          }
+        >
+          {checkText}
+        </p>
+        <button className={styles.button} onClick={onClickButton}>
+          모임 만들기
+        </button>
       </div>
     </div>
   );

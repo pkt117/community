@@ -16,12 +16,10 @@ const Login = () => {
   const passwordRef = useRef();
 
   const dispatch = useDispatch();
-  const { currentState, error } = useSelector(
-    ({ loadingReducer, loginReducer }) => ({
-      currentState: loginReducer.currentState,
-      error: loginReducer.error,
-    })
-  );
+  const { currentState, error } = useSelector(({ loginReducer }) => ({
+    currentState: loginReducer.currentState,
+    error: loginReducer.error,
+  }));
 
   const navigate = useNavigate();
 
@@ -66,7 +64,7 @@ const Login = () => {
 
   //  로그인 상태
   useEffect(() => {
-    if (currentState === "login") navigate("/");
+    if (currentState === "login") navigate("/my_group");
     else if (error) setLoginCheck(true);
   }, [currentState, error]);
 

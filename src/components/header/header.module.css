@@ -1,5 +1,5 @@
 @value colorHeader, colorHeaderHover from "../../common/colors.css";
-@value largeMargin, mediumMargin, smallMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+@value largeMargin, mediumMargin, smallMargin, smallFontSize from "../../common/size.css";
 
 .header {
   position: sticky;

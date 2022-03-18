@@ -1,0 +1,99 @@
+@value mediumFontSize, xsmallFontSize, smallFontSize,microMargin,smallMargin, mediumMargin from "../../common/size.css";
+@value colorLightGrey, colorFocus, colorGroupButton, colorWhite from "../../common/colors.css";
+
+.createGroup {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.createGroup::-webkit-scrollbar {
+  display: none;
+}
+
+.title {
+  font-size: xsmallFontSize;
+  margin-left: smallMargin;
+}
+
+.wrap {
+  display: flex;
+  margin-top: smallMargin;
+}
+
+.input__title {
+  display: block;
+  width: 15%;
+  font-size: smallFontSize;
+  margin: smallMargin;
+  white-space: nowrap;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid colorLightGrey;
+  margin: 0;
+  padding: 0;
+  margin-bottom: microMargin;
+  padding-top: microMargin;
+  font-size: smallFontSize;
+  width: 60%;
+}
+
+.contentWrap {
+  display: flex;
+  flex-direction: column;
+  margin-top: smallMargin;
+}
+
+.content {
+  margin: 0 calc(smallMargin * 1.2);
+  padding: smallMargin;
+  resize: none;
+  height: 7rem;
+}
+
+.buttonWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: smallMargin;
+  position: relative;
+}
+
+.check {
+  font-size: smallFontSize;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
+.activeCheck {
+  display: block;
+  color: colorFocus;
+}
+
+.button {
+  margin-top: mediumMargin;
+  width: 80%;
+  padding: microMargin;
+  border-radius: microMargin;
+  border: 0;
+  outline: 0;
+  background-color: colorGroupButton;
+  color: colorWhite;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.8;
+}

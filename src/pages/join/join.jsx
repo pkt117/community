@@ -73,7 +73,7 @@ const Join = () => {
 
   //  회원가입 상태
   useEffect(() => {
-    if (joinState === "success") navigate("/login");
+    if (joinState === "success") navigate("/");
     else if (error === "auth/email-already-in-use") setEmailCheck(true);
     else if (error !== null) alert(error);
   }, [error, joinState]);

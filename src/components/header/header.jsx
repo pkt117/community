@@ -16,13 +16,14 @@ const Header = (props) => {
     if (authState === "login") {
       setConfirmOpen(true);
     } else if (authState === "logout") {
-      navigate("/login");
+      navigate("/");
     }
   };
 
   const confirmCheck = () => {
     dispatch(logout());
     setConfirmOpen(false);
+    navigate("/");
   };
   const confirmCancel = () => {
     setConfirmOpen(false);

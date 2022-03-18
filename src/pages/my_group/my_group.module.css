@@ -2,6 +2,7 @@
 @value colorShadow, colorWhite, colorGroupButton from "../../common/colors.css";
 .myGroup {
   width: 100%;
+  height: 100%;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
