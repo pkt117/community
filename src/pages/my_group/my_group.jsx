@@ -23,7 +23,7 @@ const MyGroup = (props) => {
   return (
     <div className={styles.myGroup}>
       {myGroups.map((item) => (
-        <GroupList item={item} key={item.timestamp} />
+        <GroupList item={item} key={item.createdAt} />
       ))}
 
       <button className={styles.createGroup} onClick={onCreateButton}>

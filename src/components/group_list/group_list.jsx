@@ -6,7 +6,9 @@ import { IoLocationOutline } from "react-icons/io5";
 const GroupList = ({ item }) => {
   return (
     <div className={styles.list}>
-      <div className={styles.imageWrap}></div>
+      <div className={styles.imageWrap}>
+        <img src={item.postImage} className={styles.image} />
+      </div>
       <div className={styles.infoWrap}>
         <div className={styles.area}>
           <IoLocationOutline className={styles.area__icon} />

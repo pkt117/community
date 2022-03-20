@@ -29,6 +29,12 @@ const boardReducer = (state = initialState, action) => {
         selected: {},
       };
 
+    case TOTAL_BOARD_LOAD:
+      return {
+        ...state,
+        totalGroups: action.payload,
+        selected: {},
+      };
     default:
       return state;
   }

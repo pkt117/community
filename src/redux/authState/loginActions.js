@@ -3,7 +3,7 @@ import firebaseApp from "../../service/firebase";
 import AuthService from "../../service/authService";
 import DbService from "../../service/dbService";
 import { loadingStart, loadingFinish } from "../loading/actions";
-import { getMyGroupAsync } from "../board/actions";
+import { getMyGroupAsync, myBoardLoad } from "../board/actions";
 
 const authService = new AuthService(firebaseApp);
 const dbService = new DbService(firebaseApp);
@@ -63,6 +63,13 @@ export const loginCheck = () => (dispatch) => {
     }
   });
 };
+//  내 모임 관련 redux state 초기화
+export const logoutAsync = () => (dispatch) => {
+  authService.logout();
+  dispatch(myBoardLoad([]));
+
+  return dispatch(logout());
+};
 
 // actions
 
@@ -74,7 +81,6 @@ export const loginSuccess = (userInfo) => {
 };
 
 export const logout = () => {
-  authService.logout();
   return {
     type: LOGOUT,
   };

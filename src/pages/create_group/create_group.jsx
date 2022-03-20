@@ -21,10 +21,13 @@ const CreateGroup = (props) => {
   const [categoryValue, setCategoryValue] = useState(null);
   const [areaValue, setAreaValue] = useState(null);
   const [personnelValue, setPersonnelValue] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
+  const [imageFileName, setImageFileName] = useState(null);
   const [check, setCheck] = useState(false);
   const [checkText, setCheckText] = useState("");
   const nameRef = useRef();
   const contentRef = useRef();
+  const fileRef = useRef();
 
   const getCategory = (value) => setCategoryValue(value);
   const getArea = (value) => setAreaValue(value);
@@ -52,14 +55,23 @@ const CreateGroup = (props) => {
         personnel: personnelValue,
         content,
       };
-      dispatch(createGroupAsync(value));
+      dispatch(createGroupAsync(value, imageFile));
       navigate("/my_group");
     }
   };
 
+  const onFileChange = (event) => {
+    setImageFileName(event.target.files[0].name);
+    setImageFile(event.target.files[0]);
+  };
+
+  const onClickFile = () => {
+    fileRef.current.click();
+  };
+
   useEffect(() => {
     if (personnelSetting == "") {
-      for (let i = 1; i <= 100; i++)
+      for (let i = 2; i <= 100; i++)
         setPersonnelSetting((prev) => [...prev, { value: `${i}명` }]);
     }
   }, []);
@@ -96,6 +108,27 @@ const CreateGroup = (props) => {
           options={personnelSetting}
           placeholder="인원 선택"
           getSelectValue={getPersonnel}
+        />
+      </div>
+
+      <div className={styles.wrap}>
+        <h2 className={styles.input__title}>사진 첨부</h2>
+
+        <input
+          ref={fileRef}
+          type="file"
+          accept="image/*"
+          className={styles.input__file}
+          onChange={onFileChange}
+        />
+
+        <input
+          type="text"
+          className={styles.button__file}
+          placeholder="사진 첨부"
+          value={imageFileName === null ? "" : imageFileName}
+          readOnly
+          onClick={onClickFile}
         />
       </div>
 

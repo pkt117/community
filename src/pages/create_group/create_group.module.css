@@ -32,6 +32,23 @@
 }
 
 .input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid colorLightGrey;
+  margin: 0;
+  padding: 0;
+  margin-bottom: microMargin;
+  padding-top: microMargin;
+  font-size: smallFontSize;
+  width: 60%;
+}
+
+.input__file {
+  display: none;
+}
+
+.button__file {
   background: transparent;
   border: none;
   outline: none;
@@ -42,6 +59,8 @@
   padding-top: microMargin;
   font-size: smallFontSize;
   width: 60%;
+  cursor: pointer;
+  text-align: left;
 }
 
 .contentWrap {

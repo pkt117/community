@@ -4,7 +4,7 @@ import { AiOutlineUnlock, AiOutlineLock } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ConfirmPopup from "../confirm_popup/confirm_popup";
-import { logout } from "../../redux/authState/loginActions";
+import { logoutAsync } from "../../redux/authState/loginActions";
 
 const Header = (props) => {
   const authState = useSelector((state) => state.loginReducer.currentState);
@@ -21,7 +21,7 @@ const Header = (props) => {
   };
 
   const confirmCheck = () => {
-    dispatch(logout());
+    dispatch(logoutAsync());
     setConfirmOpen(false);
     navigate("/");
   };

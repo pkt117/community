@@ -14,12 +14,12 @@ const dbService = new DbService(firebaseApp);
 const authService = new AuthService(firebaseApp);
 
 //  게시글 생성
-export const createGroupAsync = (value) => async (dispatch) => {
+export const createGroupAsync = (value, imageFile) => async (dispatch) => {
   dispatch(loadingStart());
   const uid = authService.getUid();
 
   try {
-    await dbService.groupRegister(value, uid);
+    await dbService.groupRegister(value, imageFile, uid);
     const item = await dbService.getMyGroup(uid);
     dispatch(loadingFinish());
     return dispatch(myBoardLoad(item));
@@ -44,16 +44,27 @@ export const getMyGroupAsync = () => async (dispatch) => {
   }
 };
 
-// export const boardSave = (value) => {
-//   return {
-//     type: BOARD_SAVE,
-//     payload: value,
-//   };
-// };
+// 전체게시글 불러오기
+export const getTotalGroupAsync = () => async (dispatch) => {
+  try {
+    const item = await dbService.getTotalGroup();
+
+    return dispatch(totalBoardLoad(item));
+  } catch (error) {
+    return console.log(error.code);
+  }
+};
 
 export const myBoardLoad = (value) => {
   return {
     type: MY_BOARD_LOAD,
+    payload: value,
+  };
+};
+
+export const totalBoardLoad = (value) => {
+  return {
+    type: TOTAL_BOARD_LOAD,
     payload: value,
   };
 };
