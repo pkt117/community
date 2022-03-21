@@ -9,12 +9,12 @@ import {
   FreeBoard,
   Join,
 } from "./pages";
+
 import Header from "./components/header/header";
 import Navbar from "./components/navbar/navbar";
 import Loading from "./components/loading/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { loginCheck } from "./redux/authState/loginActions";
-import { getMyGroupAsync } from "./redux/board/actions";
 
 function App() {
   const location = useLocation();
@@ -51,11 +51,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/my_group" element={<MyGroup />} />
-        <Route path="/create_group" element={<CreateGroup />} />
-        <Route path="/find_group" element={<FindGroup />} />
-        <Route path="/free_board" element={<FreeBoard />} />
+        <Route path="join" element={<Join />} />
+        <Route path="my_group" element={<MyGroup />} />
+        <Route path="create_group" element={<CreateGroup />} />
+        <Route path="find_group" element={<FindGroup />} />
+        <Route path="free_board" element={<FreeBoard />} />
       </Routes>
     </div>
   );

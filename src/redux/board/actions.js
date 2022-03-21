@@ -22,6 +22,7 @@ export const createGroupAsync = (value, imageFile) => async (dispatch) => {
     await dbService.groupRegister(value, imageFile, uid);
     const item = await dbService.getMyGroup(uid);
     dispatch(loadingFinish());
+
     return dispatch(myBoardLoad(item));
   } catch (error) {
     dispatch(loadingFinish());

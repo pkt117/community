@@ -9,9 +9,12 @@ import { useNavigate } from "react-router-dom";
 const CreateGroup = (props) => {
   const category = [
     { value: "스터디" },
-    { value: "게임" },
-    { value: "취미" },
-    { value: "기타" },
+    { value: "게임/오락" },
+    { value: "운동/스포츠" },
+    { value: "공연/축제" },
+    { value: "봉사활동" },
+    { value: "사교/인맥" },
+    { value: "기타취미" },
   ];
 
   const dispatch = useDispatch();
@@ -44,6 +47,9 @@ const CreateGroup = (props) => {
     } else if (categoryValue === null) {
       setCheck(true);
       setCheckText("카테고리를 선택해주세요");
+    } else if (areaValue === null) {
+      setCheck(true);
+      setCheckText("지역을 입력해주세요");
     } else if (personnelValue === null) {
       setCheck(true);
       setCheckText("모집인원을 선택해주세요");

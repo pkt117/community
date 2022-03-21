@@ -3,7 +3,11 @@ import firebaseApp from "../../service/firebase";
 import AuthService from "../../service/authService";
 import DbService from "../../service/dbService";
 import { loadingStart, loadingFinish } from "../loading/actions";
-import { getMyGroupAsync, myBoardLoad } from "../board/actions";
+import {
+  getMyGroupAsync,
+  getTotalGroupAsync,
+  myBoardLoad,
+} from "../board/actions";
 
 const authService = new AuthService(firebaseApp);
 const dbService = new DbService(firebaseApp);

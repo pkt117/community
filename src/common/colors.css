@@ -1,9 +1,11 @@
 /* header 컬러 */
-@value colorHeader: #f5f5f5;
+/* colorHeader: #f5f5f5 => #fffde7 */
+@value colorHeader: #fffde7;
 @value colorHeaderHover: #e0e0e0;
 
 /* navbar 컬러 */
-@value colorNavbar: #fafafa;
+/* colorNavbar: #fafafa => #fbf8f1 */
+@value colorNavbar: #fbf8f1;
 @value colorNavbarLine: #424242;
 
 /* login & join 컬러 */
@@ -20,6 +22,8 @@
 /* group & board 컬러 */
 @value colorGroupButton: #33b49e;
 @value colorAreaText: #ffb74d;
+@value colorHorizontalScroll: #f7ecde;
+@value colorSelectedButton: #e9dac1;
 
 /* search 컬러 */
 @value colorSearchbar: #f5f5f5;

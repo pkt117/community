@@ -2,6 +2,8 @@
 
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  /* 모바일에서 클릭시 파란배경 없애기 */
 }
 
 .app {

@@ -113,7 +113,6 @@ export default class DbService {
 
     querySnapshot.forEach((doc) => data.push(doc.data()));
 
-    console.log(data);
     return data;
   }
 }
