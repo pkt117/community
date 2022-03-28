@@ -10,7 +10,6 @@
   width: 100%;
   max-width: 600px;
   height: 100vh;
-  /* overflow-y: hidden; */
   margin: auto;
   background-color: colorWhite;
   box-shadow: colorShadow;
@@ -18,4 +17,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.app::-webkit-scrollbar {
+  display: none;
 }

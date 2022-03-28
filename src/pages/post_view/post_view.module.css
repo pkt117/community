@@ -1,0 +1,73 @@
+@value colorWhite, colorBlack, colorUnderLine, colorFocus from "../../common/colors.css";
+@value smallFontSize,mediumFontSize, smallMargin, mediumMargin, microMargin from "../../common/size.css";
+
+.postView {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.navWrap {
+  position: sticky;
+  top: 0;
+  background-color: colorWhite;
+}
+
+.title {
+  font-size: calc(smallFontSize * 1.2);
+  margin-top: microMargin;
+  margin-left: mediumMargin;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid colorUnderLine;
+  position: relative;
+}
+
+.link {
+  flex-basis: 25%;
+  text-align: center;
+  text-decoration: none;
+  color: colorBlack;
+  background-color: transparent;
+  font-size: smallFontSize;
+  font-weight: bold;
+  padding: smallMargin;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.active {
+  color: colorFocus;
+}
+
+.underline {
+  position: absolute;
+  height: 2px;
+  background-color: colorBlack;
+  width: 25%;
+  bottom: -1px;
+  transition: all 200ms ease-in-out;
+}
+
+.active:nth-child(1) ~ .underline {
+  transform: translateX(0);
+}
+.active:nth-child(2) ~ .underline {
+  transform: translateX(100%);
+}
+.active:nth-child(3) ~ .underline {
+  transform: translateX(200%);
+}
+.active:nth-child(4) ~ .underline {
+  transform: translateX(300%);
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+}

@@ -144,6 +144,7 @@ const CreateGroup = (props) => {
           ref={contentRef}
           className={styles.content}
           placeholder="모임 내용을 적어주세요"
+          wrap="hard"
         />
       </div>
       <div className={styles.buttonWrap}>

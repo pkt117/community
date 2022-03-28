@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./header.module.css";
 import { AiOutlineUnlock, AiOutlineLock } from "react-icons/ai";
+import { BsThreeDots } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ConfirmPopup from "../confirm_popup/confirm_popup";
@@ -29,6 +30,10 @@ const Header = (props) => {
     setConfirmOpen(false);
   };
 
+  const clickSetting = () => {
+    console.log("se");
+  };
+
   return (
     <>
       <div className={styles.header}>
@@ -39,6 +44,10 @@ const Header = (props) => {
           ) : (
             <AiOutlineLock className={styles.authIcon} />
           )}
+        </button>
+
+        <button className={styles.setting} onClick={clickSetting}>
+          <BsThreeDots />
         </button>
       </div>
 

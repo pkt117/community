@@ -10,11 +10,14 @@ const Join = () => {
   const [passwordCheck, setPasswordCheck] = useState(false);
   const [passwordLength, setPasswordLength] = useState(false);
   const [emailCheck, setEmailCheck] = useState(false);
+  const [imgFile, setImgFile] = useState(null);
+  const [imgSrc, setImgSrc] = useState("");
 
   const emailRef = useRef();
   const passwordRef = useRef();
   const rePasswordRef = useRef();
   const nameRef = useRef();
+  const fileRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,7 +71,25 @@ const Join = () => {
     const password = passwordRef.current.value;
     const name = nameRef.current.value;
 
-    dispatch(userJoinAsync(email, password, name));
+    dispatch(userJoinAsync(email, password, name, imgFile));
+  };
+
+  const onFileChange = (event) => {
+    const file = event.target.files[0];
+    setImgFile(file);
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImgSrc(reader.result);
+        resolve();
+      };
+    });
+  };
+
+  const onImgButton = (event) => {
+    event.preventDefault();
+    fileRef.current.click();
   };
 
   //  회원가입 상태
@@ -80,7 +101,20 @@ const Join = () => {
 
   return (
     <form className={styles.join}>
-      <h1 className={styles.title}>회원가입</h1>
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        className={styles.input__file}
+        onChange={onFileChange}
+      />
+
+      <button className={styles.imgButton} onClick={onImgButton}>
+        {!imgSrc && <>+</>}
+        {imgSrc && (
+          <img src={imgSrc} className={styles.img} alt="preview-img" />
+        )}
+      </button>
 
       <div className={styles.inputWrap}>
         <input

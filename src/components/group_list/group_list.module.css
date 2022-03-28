@@ -1,4 +1,4 @@
-@value colorAreaText, colorFocus from "../../common/colors.css";
+@value colorAreaText, colorFocus, colorGroupHover from "../../common/colors.css";
 @value smallMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
 
 .list {
@@ -6,6 +6,11 @@
   height: 8rem;
   display: flex;
   padding: smallMargin;
+  cursor: pointer;
+}
+
+.list:hover {
+  background-color: colorGroupHover;
 }
 
 .imageWrap {

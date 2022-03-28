@@ -8,6 +8,7 @@ import {
   CreateGroup,
   FreeBoard,
   Join,
+  PostView,
 } from "./pages";
 
 import Header from "./components/header/header";
@@ -38,15 +39,15 @@ function App() {
   return (
     <div className={styles.app}>
       {loading && <Loading />}
-      {location.pathname === "/" ||
-      location.pathname === "/join" ||
-      location.pathname === "/create_group" ? (
-        <></>
-      ) : (
+      {location.pathname === "/my_group" ||
+      location.pathname === "/find_group" ||
+      location.pathname === "/free_board" ? (
         <>
           <Header />
           <Navbar />
         </>
+      ) : (
+        <></>
       )}
 
       <Routes>
@@ -56,6 +57,7 @@ function App() {
         <Route path="create_group" element={<CreateGroup />} />
         <Route path="find_group" element={<FindGroup />} />
         <Route path="free_board" element={<FreeBoard />} />
+        <Route path="post_view/:id" element={<PostView />} />
       </Routes>
     </div>
   );

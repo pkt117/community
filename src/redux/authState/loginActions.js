@@ -17,6 +17,7 @@ export const googleLoginAsync = () => async (dispatch) => {
     dispatch(loadingStart());
     const user = await authService.googleLogin();
     dbService.userRegister(user.uid, user.email, user.displayName, "google");
+    const profile = await dbService.getUserInfo(user.uid);
     dispatch(loadingFinish());
 
     return dispatch(
@@ -24,6 +25,8 @@ export const googleLoginAsync = () => async (dispatch) => {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
+        profileImg: profile.profileImg,
+        intro: profile.intro,
       })
     );
   } catch (error) {
@@ -36,6 +39,7 @@ export const emailLoginAsync = (email, password) => async (dispatch) => {
   try {
     dispatch(loadingStart());
     const user = await authService.emailLogin(email, password);
+    const profile = await dbService.getUserInfo(user.uid);
     dispatch(loadingFinish());
 
     return dispatch(
@@ -43,6 +47,8 @@ export const emailLoginAsync = (email, password) => async (dispatch) => {
         uid: user.uid,
         email: user.email,
         displayName: user.displayName,
+        profileImg: profile.profileImg,
+        intro: profile.intro,
       })
     );
   } catch (error) {
@@ -57,7 +63,14 @@ export const loginCheck = () => (dispatch) => {
   authService.onAuthChange(async (user) => {
     if (user != null) {
       const { email, displayName, uid } = await user;
-      const userInfo = { email, displayName, uid };
+      const profile = await dbService.getUserInfo(uid);
+      const userInfo = {
+        email,
+        displayName,
+        uid,
+        profileImg: profile.profileImg,
+        intro: profile.intro,
+      };
 
       dispatch(getMyGroupAsync());
       dispatch(loadingFinish());

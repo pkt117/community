@@ -50,8 +50,11 @@ export default class AuthService {
   }
 
   //  현재 유저의 uid 얻기
-  getUid() {
-    return this.auth.currentUser.uid;
+  getUserInfo() {
+    return {
+      uid: this.auth.currentUser.uid,
+      name: this.auth.currentUser.displayName,
+    };
   }
 
   logout() {

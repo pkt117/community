@@ -6,6 +6,14 @@ import boardReducer from "./board/reducer";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["loginReducer"],
+};
 
 const rootReducer = combineReducers({
   joinReducer,
@@ -14,8 +22,10 @@ const rootReducer = combineReducers({
   boardReducer,
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = createStore(
-  rootReducer,
+  persistedReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 

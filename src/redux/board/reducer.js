@@ -4,6 +4,7 @@ import {
   BOARD_UPDATE,
   MY_BOARD_LOAD,
   TOTAL_BOARD_LOAD,
+  SELECTED_BOARD,
 } from "./types";
 
 const initialState = {
@@ -26,15 +27,20 @@ const boardReducer = (state = initialState, action) => {
       return {
         ...state,
         myGroups: action.payload,
-        selected: {},
       };
 
     case TOTAL_BOARD_LOAD:
       return {
         ...state,
         totalGroups: action.payload,
-        selected: {},
       };
+
+    case SELECTED_BOARD:
+      return {
+        ...state,
+        selected: action.payload,
+      };
+
     default:
       return state;
   }

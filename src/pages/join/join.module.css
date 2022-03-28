@@ -10,6 +10,33 @@
   justify-content: center;
 }
 
+.input__file {
+  display: none;
+}
+
+.imgButton {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  font-size: 4rem;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  background-color: colorLightGrey;
+  transition: transform 100ms ease-in-out;
+}
+
+.img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.imgButton:hover {
+  transform: scale(1.05);
+}
+
 .inputWrap {
   width: 60%;
   position: relative;

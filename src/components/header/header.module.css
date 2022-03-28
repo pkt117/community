@@ -1,5 +1,5 @@
 @value colorHeader, colorHeaderHover from "../../common/colors.css";
-@value largeMargin, mediumMargin, smallMargin, smallFontSize from "../../common/size.css";
+@value largeMargin, mediumMargin, smallMargin, microMargin,smallFontSize from "../../common/size.css";
 
 .header {
   position: sticky;
@@ -19,7 +19,7 @@
   outline: 0;
   border: 0;
   background-color: transparent;
-  margin-right: mediumMargin;
+  margin-right: calc(mediumMargin * 1.1);
   cursor: pointer;
 }
 
@@ -30,4 +30,21 @@
 
 .button:hover .authIcon {
   transform: scale(1.1);
+}
+
+.setting {
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: microMargin;
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+}
+
+.setting:hover {
+  transform: translateY(-50%) scale(1.1);
 }
