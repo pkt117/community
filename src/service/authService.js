@@ -53,7 +53,6 @@ export default class AuthService {
   getUserInfo() {
     return {
       uid: this.auth.currentUser.uid,
-      name: this.auth.currentUser.displayName,
     };
   }
 

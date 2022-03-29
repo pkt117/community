@@ -24,9 +24,10 @@ export const googleLoginAsync = () => async (dispatch) => {
       loginSuccess({
         uid: user.uid,
         email: user.email,
-        displayName: user.displayName,
+        name: user.displayName,
         profileImg: profile.profileImg,
         intro: profile.intro,
+        createdAt: profile.createdAt,
       })
     );
   } catch (error) {
@@ -46,9 +47,10 @@ export const emailLoginAsync = (email, password) => async (dispatch) => {
       loginSuccess({
         uid: user.uid,
         email: user.email,
-        displayName: user.displayName,
+        name: user.displayName,
         profileImg: profile.profileImg,
         intro: profile.intro,
+        createdAt: profile.createdAt,
       })
     );
   } catch (error) {
@@ -66,10 +68,11 @@ export const loginCheck = () => (dispatch) => {
       const profile = await dbService.getUserInfo(uid);
       const userInfo = {
         email,
-        displayName,
+        name: displayName,
         uid,
         profileImg: profile.profileImg,
         intro: profile.intro,
+        createdAt: profile.createdAt,
       };
 
       dispatch(getMyGroupAsync());
@@ -80,13 +83,23 @@ export const loginCheck = () => (dispatch) => {
     }
   });
 };
-//  내 모임 관련 redux state 초기화
+//  로그아웃, 내 모임 관련 redux state 초기화
 export const logoutAsync = () => (dispatch) => {
   authService.logout();
   dispatch(myBoardLoad([]));
 
   return dispatch(logout());
 };
+
+// 프로필 수정
+export const profileChangeAsync =
+  (imgFile, name, intro) => async (dispatch, getState) => {
+    const userInfo = getState().loginReducer.userInfo;
+    await dbService.profileChange(userInfo, imgFile, name, intro);
+    const profile = await dbService.getUserInfo(userInfo.uid);
+
+    return dispatch(loginSuccess(profile));
+  };
 
 // actions
 

@@ -109,7 +109,12 @@ const Join = () => {
         onChange={onFileChange}
       />
 
-      <button className={styles.imgButton} onClick={onImgButton}>
+      <button
+        className={
+          imgSrc ? `${styles.imgButton} ${styles.selectImg}` : styles.imgButton
+        }
+        onClick={onImgButton}
+      >
         {!imgSrc && <>+</>}
         {imgSrc && (
           <img src={imgSrc} className={styles.img} alt="preview-img" />
@@ -125,6 +130,7 @@ const Join = () => {
           placeholder="이메일"
           className={styles.input}
           onChange={handleInput}
+          autoComplete="off"
         />
         <label htmlFor="email" className={styles.label}>
           이메일
@@ -144,6 +150,7 @@ const Join = () => {
           placeholder="닉네임"
           className={styles.input}
           onChange={handleInput}
+          autoComplete="off"
         />
         <label htmlFor="name" className={styles.label}>
           닉네임

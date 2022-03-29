@@ -1,4 +1,4 @@
-@value colorLightGrey, colorPlaceholder, colorFocus, colorWhite, colorAuthButton from "../../common/colors.css";
+@value colorLightGrey, colorProfileShadow, colorPlaceholder, colorFocus, colorWhite, colorAuthButton from "../../common/colors.css";
 @value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
 
 .join {
@@ -25,6 +25,11 @@
   cursor: pointer;
   background-color: colorLightGrey;
   transition: transform 100ms ease-in-out;
+  box-shadow: colorProfileShadow;
+}
+
+.selectImg {
+  background-color: transparent;
 }
 
 .img {
@@ -52,7 +57,7 @@
 }
 
 .inputWrap > input {
-  background: transparent;
+  background-color: transparent;
   border: none;
   border-bottom: 1px solid colorLightGrey;
   padding: calc(smallMargin * 1.2) 0 calc(smallMargin * 0.3) 0;
@@ -83,6 +88,7 @@
 .input:focus + .label,
 .label {
   font-size: calc(smallFontSize * 0.8);
+  font-weight: bold;
   pointer-events: none;
   position: absolute;
   top: 0;

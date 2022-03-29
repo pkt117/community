@@ -17,10 +17,10 @@ const authService = new AuthService(firebaseApp);
 //  게시글 생성
 export const createGroupAsync = (value, imageFile) => async (dispatch) => {
   dispatch(loadingStart());
-  const { uid, name } = authService.getUserInfo();
+  const { uid } = authService.getUserInfo();
 
   try {
-    await dbService.groupRegister(value, imageFile, uid, name);
+    await dbService.groupRegister(value, imageFile, uid);
     const item = await dbService.getMyGroup(uid);
     dispatch(loadingFinish());
 

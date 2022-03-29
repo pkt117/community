@@ -1,4 +1,4 @@
-@value colorHeader, colorHeaderHover from "../../common/colors.css";
+@value colorHeader, colorPopupShadow, colorWhite, colorBlack, colorAuthModal, colorAuthModalFont from "../../common/colors.css";
 @value largeMargin, mediumMargin, smallMargin, microMargin,smallFontSize from "../../common/size.css";
 
 .header {
@@ -7,6 +7,7 @@
   background-color: colorHeader;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -19,8 +20,12 @@
   outline: 0;
   border: 0;
   background-color: transparent;
-  margin-right: calc(mediumMargin * 1.1);
+  margin-right: smallMargin;
   cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  padding: 0;
 }
 
 .authIcon {
@@ -28,23 +33,47 @@
   transition: transform 200ms ease-in-out;
 }
 
-.button:hover .authIcon {
+.button:hover {
   transform: scale(1.1);
 }
 
-.setting {
-  outline: 0;
-  border: 0;
-  background-color: transparent;
+.img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+
+.list {
   position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-right: microMargin;
+  right: 2.2rem;
+  top: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  width: 9rem;
+  padding: 0;
+  box-shadow: colorPopupShadow;
+  border-radius: microMargin 0 microMargin microMargin;
+}
+
+.setting {
+  background-color: colorAuthModal;
+  color: colorAuthModalFont;
+  font-weight: bold;
+  padding: microMargin;
+  border: 0;
+  outline: 0;
   cursor: pointer;
-  transition: transform 200ms ease-in-out;
+}
+
+.setting:first-child {
+  border-bottom: 1px dotted colorAuthModalFont;
+  border-radius: microMargin 0 0 0;
+}
+
+.setting:last-child {
+  border-radius: 0 0 microMargin microMargin;
 }
 
 .setting:hover {
-  transform: translateY(-50%) scale(1.1);
+  opacity: 0.6;
 }

@@ -35,9 +35,9 @@ export default class DbService {
             storageUrl = await getDownloadURL(storageRef);
           }
           await setDoc(doc(this.db, "users", uid), {
-            uid: uid,
-            email: email,
-            name: name,
+            uid,
+            email,
+            name,
             createdAt: serverTimestamp(),
             profileImg: storageUrl,
             intro: "",
@@ -55,9 +55,9 @@ export default class DbService {
         else {
           try {
             await setDoc(doc(this.db, "users", uid), {
-              uid: uid,
-              email: email,
-              name: name,
+              uid,
+              email,
+              name,
               createdAt: serverTimestamp(),
               profileImg:
                 "https://firebasestorage.googleapis.com/v0/b/community-74415.appspot.com/o/profile%2Fdefault_profile.png?alt=media&token=c811083e-ecac-4deb-9bbf-49b272f629e5",
@@ -71,8 +71,37 @@ export default class DbService {
     }
   }
 
+  // 프로필 수정
+  async profileChange(userInfo, imgFile, name, intro) {
+    if (imgFile == null) {
+      await setDoc(doc(this.db, "users", userInfo.uid), {
+        uid: userInfo.uid,
+        email: userInfo.email,
+        name,
+        createdAt: userInfo.createdAt,
+        profileImg: userInfo.profileImg,
+        intro,
+      });
+    } else {
+      const storageRef = ref(
+        this.storage,
+        `profile/${userInfo.uid}/profileImg.png`
+      );
+      await uploadBytes(storageRef, imgFile);
+      const storageUrl = await getDownloadURL(storageRef);
+      await setDoc(doc(this.db, "users", userInfo.uid), {
+        uid: userInfo.uid,
+        email: userInfo.email,
+        name,
+        createdAt: userInfo.createdAt,
+        profileImg: storageUrl,
+        intro,
+      });
+    }
+  }
+
   // 게시글 등록
-  async groupRegister(value, imageFile, uid, name) {
+  async groupRegister(value, imageFile, uid) {
     const randomId =
       Math.random().toString(36).substring(2, 12) +
       Math.random().toString(36).substring(2, 12);
@@ -132,7 +161,7 @@ export default class DbService {
       createdAt: serverTimestamp(),
       postId: randomId,
       postImage: storageUrl,
-      userList: [{ uid, name, manager: true }],
+      userList: [{ uid, manager: true }],
     };
     await setDoc(doc(this.db, "group", randomId), item);
   }
