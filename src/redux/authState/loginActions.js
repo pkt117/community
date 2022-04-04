@@ -64,11 +64,11 @@ export const loginCheck = () => (dispatch) => {
   dispatch(loadingStart());
   authService.onAuthChange(async (user) => {
     if (user != null) {
-      const { email, displayName, uid } = await user;
+      const { email, uid } = await user;
       const profile = await dbService.getUserInfo(uid);
       const userInfo = {
         email,
-        name: displayName,
+        name: profile.name,
         uid,
         profileImg: profile.profileImg,
         intro: profile.intro,

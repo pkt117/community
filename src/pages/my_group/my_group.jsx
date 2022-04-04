@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import GroupList from "../../components/group_list/group_list";
-// import { getMyGroupAsync } from "../../redux/board/actions";
+import GroupList from "components/group_list/group_list";
+import { getMyGroupAsync } from "redux/board/actions";
 import styles from "./my_group.module.css";
 
 const MyGroup = (props) => {
@@ -16,9 +16,9 @@ const MyGroup = (props) => {
     navigate("/create_group");
   };
 
-  // useEffect(() => {
-  //   dispatch(getMyGroupAsync());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(getMyGroupAsync());
+  }, []);
 
   return (
     <div className={styles.myGroup}>

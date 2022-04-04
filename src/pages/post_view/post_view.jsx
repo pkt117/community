@@ -2,25 +2,31 @@ import React, { useEffect, useState } from "react";
 import styles from "./post_view.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getSelectedGroupAsync } from "../../redux/board/actions";
-import { Info, Chat, Board, Album } from "../../components/post_view";
+import { getSelectedGroupAsync, groupJoinAsync } from "redux/board/actions";
+import { Info, Chat, Board, Album } from "components/post_view";
 
 const PostView = () => {
-  const { selected, uid } = useSelector(({ boardReducer, loginReducer }) => ({
-    selected: boardReducer.selected,
-    uid: loginReducer.userInfo.uid,
-  }));
+  const { selected, userInfo } = useSelector(
+    ({ selectedBoardReducer, loginReducer }) => ({
+      selected: selectedBoardReducer.selected,
+      userInfo: loginReducer.userInfo,
+    })
+  );
+
   const params = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [selectedButton, setSelectedButton] = useState("정보");
 
-  const groupJoin = () => {};
-
-  useEffect(() => {
+  const groupJoin = async () => {
+    await dispatch(groupJoinAsync(userInfo.uid, selected));
     dispatch(getSelectedGroupAsync(params.id));
-  }, []);
+  };
+
+  // useEffect(() => {
+  //   dispatch(getSelectedGroupAsync(params.id));
+  // }, []);
 
   return (
     <div className={styles.postView}>
@@ -74,11 +80,13 @@ const PostView = () => {
       </div>
       <div className={styles.wrap}>
         {selectedButton === "정보" && (
-          <Info selected={selected} groupJoin={groupJoin} />
+          <Info selected={selected} groupJoin={groupJoin} uid={userInfo.uid} />
         )}
-        {selectedButton === "게시판" && <Board selected={selected} uid={uid} />}
-        {selectedButton === "앨범" && <Album selected={selected} uid={uid} />}
-        {selectedButton === "채팅" && <Chat selected={selected} uid={uid} />}
+        {selectedButton === "게시판" && <Board selected={selected} />}
+        {selectedButton === "앨범" && <Album selected={selected} />}
+        {selectedButton === "채팅" && (
+          <Chat selected={selected} userInfo={userInfo} />
+        )}
       </div>
     </div>
   );

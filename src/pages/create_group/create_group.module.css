@@ -1,5 +1,5 @@
-@value mediumFontSize, xsmallFontSize, smallFontSize,microMargin,smallMargin, mediumMargin from "../../common/size.css";
-@value colorLightGrey, colorFocus, colorGroupButton, colorWhite from "../../common/colors.css";
+@value mediumFontSize, xsmallFontSize, smallFontSize,microMargin,smallMargin, mediumMargin from "common/size.css";
+@value colorLightGrey, colorFocus, colorGroupButton, colorWhite from "common/colors.css";
 
 .createGroup {
   display: flex;
@@ -115,4 +115,20 @@
 
 .button:hover {
   opacity: 0.8;
+}
+
+.joinWrap {
+  display: flex;
+  width: 60%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+}
+
+.radio__button {
+  margin-right: smallMargin;
 }

@@ -1,4 +1,5 @@
 [
+  { "id": null, "area_title": "온라인", "area_code": "0" },
   { "id": null, "area_title": "서울특별시", "area_code": "11" },
   { "id": null, "area_title": "서울특별시 강남구", "area_code": "1168" },
   {
@@ -5838,7 +5839,7 @@
     "area_title": "울산광역시 중구 학성동",
     "area_code": "31110510"
   },
-  { "id": null, "area_title": "세종특별자치시", "area_code": "36" },
+
   { "id": null, "area_title": "세종특별자치시", "area_code": "3611" },
   {
     "id": null,

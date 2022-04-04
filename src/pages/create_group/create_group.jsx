@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./create_group.module.css";
-import Select from "../../components/select_box/select_box";
-import AreaSearch from "../../components/search_popup/search_popup";
+import Select from "components/select_box/select_box";
+import AreaSearch from "components/search_popup/search_popup";
 import { useDispatch } from "react-redux";
-import { createGroupAsync } from "../../redux/board/actions";
+import { createGroupAsync } from "redux/board/actions";
 import { useNavigate } from "react-router-dom";
 
 const CreateGroup = (props) => {
@@ -28,6 +28,7 @@ const CreateGroup = (props) => {
   const [imageFileName, setImageFileName] = useState(null);
   const [check, setCheck] = useState(false);
   const [checkText, setCheckText] = useState("");
+  const [joinType, setJoinType] = useState("자동 가입");
   const nameRef = useRef();
   const contentRef = useRef();
   const fileRef = useRef();
@@ -60,6 +61,7 @@ const CreateGroup = (props) => {
         area: areaValue,
         personnel: personnelValue,
         content,
+        joinType,
       };
       dispatch(createGroupAsync(value, imageFile));
       navigate("/my_group");
@@ -73,6 +75,10 @@ const CreateGroup = (props) => {
 
   const onClickFile = () => {
     fileRef.current.click();
+  };
+
+  const onJoinType = (event) => {
+    setJoinType(event.target.value);
   };
 
   useEffect(() => {
@@ -136,6 +142,34 @@ const CreateGroup = (props) => {
           readOnly
           onClick={onClickFile}
         />
+      </div>
+
+      <div className={styles.wrap}>
+        <h2 className={styles.input__title}>가입 방식</h2>
+        <div className={styles.joinWrap}>
+          <label htmlFor="자동 가입" className={styles.radio}>
+            <input
+              type="radio"
+              value="자동 가입"
+              id="자동 가입"
+              checked={joinType === "자동 가입"}
+              onChange={onJoinType}
+              className={styles.radio__button}
+            />
+            자동 가입
+          </label>
+          <label htmlFor="승인 가입" className={styles.radio}>
+            <input
+              type="radio"
+              value="승인 가입"
+              id="승인 가입"
+              checked={joinType === "승인 가입"}
+              onChange={onJoinType}
+              className={styles.radio__button}
+            />
+            승인 가입
+          </label>
+        </div>
       </div>
 
       <div className={styles.contentWrap}>

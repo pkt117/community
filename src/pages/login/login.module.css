@@ -1,5 +1,5 @@
-@value colorLightGrey, colorPlaceholder, colorFocus, colorAuthButton, colorWhite, colorTest, colorGoogle from "../../common/colors.css";
-@value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+@value colorLightGrey, colorPlaceholder, colorFocus, colorAuthButton, colorWhite, colorTest, colorGoogle from "common/colors.css";
+@value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "common/size.css";
 
 .login {
   width: 100%;

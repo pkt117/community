@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./search_popup.module.css";
-import areaData from "../../data/area_data";
-import Search from "../search/search";
+import areaData from "data/area_data";
+import Search from "components/search/search";
 
 const SearchPopup = ({ getSelectValue }) => {
   const [data, setData] = useState([]);

@@ -3,12 +3,9 @@ import styles from "./header.module.css";
 import { AiOutlineLock } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ConfirmPopup from "../confirm_popup/confirm_popup";
-import ProfileChange from "../profile_change/profile_change";
-import {
-  logoutAsync,
-  profileChangeAsync,
-} from "../../redux/authState/loginActions";
+import ConfirmPopup from "components/confirm_popup/confirm_popup";
+import ProfileChange from "components/profile_change/profile_change";
+import { logoutAsync, profileChangeAsync } from "redux/authState/loginActions";
 
 const Header = (props) => {
   const { authState, userInfo } = useSelector(({ loginReducer }) => ({

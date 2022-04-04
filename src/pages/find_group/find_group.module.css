@@ -1,5 +1,5 @@
-@value colorNavbar, colorNavbarLine, colorHorizontalScroll, colorSelectedButton from "../../common/colors.css";
-@value mediumMargin, smallMargin, smallFontSize, microMargin from "../../common/size.css";
+@value colorNavbar, colorNavbarLine, colorHorizontalScroll, colorSelectedButton from "common/colors.css";
+@value mediumMargin, smallMargin, smallFontSize, microMargin from "common/size.css";
 
 .findGroup {
   width: 100%;

@@ -1,5 +1,4 @@
 import {
-  //   BOARD_SAVE,
   BOARD_REMOVE,
   BOARD_UPDATE,
   MY_BOARD_LOAD,
@@ -7,22 +6,26 @@ import {
   SELECTED_BOARD,
 } from "./types";
 
-const initialState = {
+const boardInitialState = {
   totalGroups: [],
   myGroups: [],
-  selected: {},
 };
 
-const boardReducer = (state = initialState, action) => {
+export const selectedBoardReducer = (state = { selected: {} }, action) => {
   switch (action.type) {
-    // case BOARD_SAVE:
-    //   return {
-    //     ...state,
-    //     totalGroups: state.totalGroups.concat(action.payload),
-    //     myGroups: state.myGroups.concat(action.payload),
-    //     selected: {},
-    //   };
+    case SELECTED_BOARD:
+      return {
+        ...state,
+        selected: action.payload,
+      };
 
+    default:
+      return state;
+  }
+};
+
+export const boardReducer = (state = boardInitialState, action) => {
+  switch (action.type) {
     case MY_BOARD_LOAD:
       return {
         ...state,
@@ -35,15 +38,13 @@ const boardReducer = (state = initialState, action) => {
         totalGroups: action.payload,
       };
 
-    case SELECTED_BOARD:
-      return {
-        ...state,
-        selected: action.payload,
-      };
+    // case SELECTED_BOARD:
+    //   return {
+    //     ...state,
+    //     selected: action.payload,
+    //   };
 
     default:
       return state;
   }
 };
-
-export default boardReducer;

@@ -1,5 +1,5 @@
-@value colorLightGrey, colorProfileShadow, colorPlaceholder, colorFocus, colorWhite, colorAuthButton from "../../common/colors.css";
-@value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+@value colorLightGrey, colorProfileShadow, colorPlaceholder, colorFocus, colorWhite, colorAuthButton from "common/colors.css";
+@value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "common/size.css";
 
 .join {
   width: 100%;

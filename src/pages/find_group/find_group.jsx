@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./find_group.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import GroupList from "../../components/group_list/group_list";
-import { getTotalGroupAsync } from "../../redux/board/actions";
+import GroupList from "components/group_list/group_list";
+import { getTotalGroupAsync } from "redux/board/actions";
 
 const FindGroup = (props) => {
   const dispatch = useDispatch();

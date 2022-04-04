@@ -4,14 +4,14 @@ import { BsPerson } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { selectedBoard } from "../../redux/board/actions";
+import { getSelectedGroupAsync } from "redux/board/actions";
 
 const GroupList = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const onClickList = () => {
-    dispatch(selectedBoard(item));
+  const onClickList = async () => {
+    await dispatch(getSelectedGroupAsync(item.postId));
     navigate(`/post_view/${item.postId}`);
   };
 

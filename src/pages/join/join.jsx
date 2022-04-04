@@ -3,7 +3,7 @@ import styles from "./join.module.css";
 import { MdEmail, MdPerson, MdPassword } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userJoinAsync } from "../../redux/authState/joinActions";
+import { userJoinAsync } from "redux/authState/joinActions";
 
 const Join = () => {
   const [activeButton, setActiveButton] = useState(false);

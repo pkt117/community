@@ -1,5 +1,5 @@
-@value smallMargin, mediumMargin, microMargin from "../../common/size.css";
-@value colorShadow, colorWhite, colorGroupButton from "../../common/colors.css";
+@value smallMargin, mediumMargin, microMargin from "common/size.css";
+@value colorShadow, colorWhite, colorGroupButton from "common/colors.css";
 .myGroup {
   width: 100%;
   height: 100%;

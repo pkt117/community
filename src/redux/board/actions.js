@@ -58,23 +58,21 @@ export const getTotalGroupAsync = () => async (dispatch) => {
 };
 
 // 선택된 게시글
-export const getSelectedGroupAsync = (postId) => async (dispatch) => {
-  const selectedGroup = await dbService.getSelectedGroup(postId);
+export const getSelectedGroupAsync = (postId) => async (dispatch, getState) => {
+  const { uid } = getState().loginReducer.userInfo;
+  const selectedGroup = await dbService.getSelectedGroup(postId, uid);
 
-  return dispatch(selectedBoard(selectedGroup[0]));
+  return dispatch(selectedBoard(selectedGroup));
+};
+
+//
+export const groupJoinAsync = (uid, selected) => async (dispatch) => {
+  await dbService.groupJoin(uid, selected);
+
+  await dispatch(getMyGroupAsync());
 };
 
 export const selectedBoard = (value) => {
-  const { uid } = authService.getUserInfo();
-  let userCheck = false;
-  value.userList.forEach((item) => {
-    if (item.uid === uid) {
-      userCheck = true;
-      return false;
-    }
-  });
-  value = { ...value, userCheck };
-
   return {
     type: SELECTED_BOARD,
     payload: value,

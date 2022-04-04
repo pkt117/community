@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import loginReducer from "./authState/loginReducer";
 import joinReducer from "./authState/joinReducer";
 import loadingReducer from "./loading/reducer";
-import boardReducer from "./board/reducer";
+import { boardReducer, selectedBoardReducer } from "./board/reducer";
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
@@ -12,7 +12,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["loginReducer"],
+  whitelist: ["loginReducer", "selectedBoardReducer"],
 };
 
 const rootReducer = combineReducers({
@@ -20,6 +20,7 @@ const rootReducer = combineReducers({
   loginReducer,
   loadingReducer,
   boardReducer,
+  selectedBoardReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

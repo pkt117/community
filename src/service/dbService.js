@@ -4,13 +4,14 @@ import {
   doc,
   getDoc,
   collection,
-  addDoc,
+  updateDoc,
   serverTimestamp,
   query,
   where,
   getDocs,
   orderBy,
   limit,
+  onSnapshot,
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -156,19 +157,27 @@ export default class DbService {
       area: value.area,
       personnel: value.personnel,
       currentPersonnel: 1,
-      personnelFull: false,
       content: value.content,
       createdAt: serverTimestamp(),
       postId: randomId,
       postImage: storageUrl,
       userList: [{ uid, manager: true }],
+      messages: [],
+      joinType: value.joinType,
     };
     await setDoc(doc(this.db, "group", randomId), item);
   }
 
   // 내 게시글 가져오기
   async getMyGroup(uid) {
-    const q = query(collection(this.db, "group"), where("uid", "==", uid));
+    const q = query(
+      collection(this.db, "group"),
+
+      where("userList", "array-contains-any", [
+        { uid: uid, manager: false },
+        { uid: uid, manager: true },
+      ])
+    );
     const data = [];
 
     const querySnapshot = await getDocs(q);
@@ -195,17 +204,51 @@ export default class DbService {
   }
 
   // 선택한 게시글 가져오기
-  async getSelectedGroup(postId) {
+  async getSelectedGroup(postId, uid) {
     const q = query(
       collection(this.db, "group"),
       where("postId", "==", postId)
     );
     const data = [];
+    const userInfo = [];
+    let userCheck = false;
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => data.push(doc.data()));
 
-    return data;
+    for (let item of data[0].userList) {
+      let {
+        name,
+        intro,
+        profileImg,
+        uid: userUid,
+      } = await this.getUserInfo(item.uid);
+      userInfo.push({
+        name,
+        intro,
+        profileImg,
+        manager: item.manager,
+        uid: userUid,
+      });
+
+      if (item.uid === uid) {
+        userCheck = true;
+      }
+    }
+
+    const value = { ...data[0], userInfo, userCheck };
+
+    return value;
+  }
+
+  // 그룹 가입
+  async groupJoin(uid, selected) {
+    const updateRef = doc(this.db, "group", selected.postId);
+
+    await updateDoc(updateRef, {
+      currentPersonnel: selected.currentPersonnel + 1,
+      userList: [...selected.userList, { uid, manager: false }],
+    });
   }
 
   // 유저 정보 가져오기

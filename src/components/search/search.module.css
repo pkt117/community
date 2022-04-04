@@ -1,5 +1,5 @@
-@value microMargin from "../../common/size.css";
-@value colorSearchbar, colorWhite from "../../common/colors.css";
+@value microMargin from "common/size.css";
+@value colorSearchbar, colorWhite from "common/colors.css";
 
 .inputWrap {
   padding: microMargin;

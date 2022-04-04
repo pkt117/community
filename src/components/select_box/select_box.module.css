@@ -1,5 +1,5 @@
-@value colorLightGrey, colorLoading, colorWhite, colorPopupShadow from "../../common/colors.css";
-@value microMargin, smallFontSize from "../../common/size.css";
+@value colorLightGrey, colorLoading, colorWhite, colorPopupShadow from "common/colors.css";
+@value microMargin, smallFontSize from "common/size.css";
 
 .button {
   background: transparent;

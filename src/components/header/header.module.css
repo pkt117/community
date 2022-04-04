@@ -1,5 +1,5 @@
-@value colorHeader, colorPopupShadow, colorWhite, colorBlack, colorAuthModal, colorAuthModalFont from "../../common/colors.css";
-@value largeMargin, mediumMargin, smallMargin, microMargin,smallFontSize from "../../common/size.css";
+@value colorHeader, colorPopupShadow, colorWhite, colorBlack, colorAuthModal, colorAuthModalFont from "common/colors.css";
+@value largeMargin, mediumMargin, smallMargin, microMargin,smallFontSize from "common/size.css";
 
 .header {
   position: sticky;

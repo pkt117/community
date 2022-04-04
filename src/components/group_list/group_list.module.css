@@ -1,5 +1,5 @@
-@value colorAreaText, colorFocus, colorGroupHover from "../../common/colors.css";
-@value smallMargin, microMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+@value colorAreaText, colorFocus, colorGroupHover from "common/colors.css";
+@value smallMargin, microMargin, smallFontSize, mediumFontSize from "common/size.css";
 
 .list {
   width: 100%;

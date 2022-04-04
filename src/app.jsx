@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./app.module.css";
+import styles from "app.module.css";
 import { Route, Routes, useLocation } from "react-router-dom";
 import {
   Login,
@@ -11,11 +11,11 @@ import {
   PostView,
 } from "./pages";
 
-import Header from "./components/header/header";
-import Navbar from "./components/navbar/navbar";
-import Loading from "./components/loading/loading";
+import Header from "components/header/header";
+import Navbar from "components/navbar/navbar";
+import Loading from "components/loading/loading";
 import { useDispatch, useSelector } from "react-redux";
-import { loginCheck } from "./redux/authState/loginActions";
+import { loginCheck } from "redux/authState/loginActions";
 
 function App() {
   const location = useLocation();

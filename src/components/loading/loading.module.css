@@ -1,4 +1,4 @@
-@value colorBlack, colorLoading from "../../common/colors.css";
+@value colorBlack, colorLoading from "common/colors.css";
 
 .loading {
   width: 100%;

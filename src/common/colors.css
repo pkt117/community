@@ -32,8 +32,11 @@
 
 /* colors */
 @value colorLightGrey: #ccc;
+@value colorGrey: #b0bec5;
 @value colorWhite: #fff;
+@value colorDeepWhite: #eceff1;
 @value colorBlack: #000;
+@value colorYellow: #ffee58;
 @value colorFocus: #ff7043;
 @value colorPlaceholder: #aaa;
 @value colorUnderLine: #eee;

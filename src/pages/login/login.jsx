@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {
   emailLoginAsync,
   googleLoginAsync,
-} from "../../redux/authState/loginActions";
+} from "redux/authState/loginActions";
 
 const Login = () => {
   const [activeButton, setActiveButton] = useState(false);

@@ -1,4 +1,4 @@
-@value colorWhite, colorShadow from "./common/colors.css";
+@value colorWhite, colorShadow from "common/colors.css";
 
 * {
   box-sizing: border-box;
@@ -17,11 +17,11 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  /* overflow-y: scroll;
   -ms-overflow-style: none;
-  scrollbar-width: none;
+  scrollbar-width: none; */
 }
 
 .app::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }

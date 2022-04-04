@@ -1,5 +1,5 @@
-@value colorNavbar, colorNavbarLine from "../../common/colors.css";
-@value mediumMargin, smallMargin, smallFontSize from "../../common/size.css";
+@value colorNavbar, colorNavbarLine from "common/colors.css";
+@value mediumMargin, smallMargin, smallFontSize from "common/size.css";
 
 .navbar {
   width: 100%;

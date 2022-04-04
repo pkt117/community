@@ -1,5 +1,5 @@
-@value colorLoading, colorProfileShadow, colorLightGrey, colorFocus, colorPopupHeader, colorPopupShadow, colorBlack, colorWhite, colorLightGrey from "../../common/colors.css";
-@value microMargin, mediumMargin, smallMargin, smallFontSize, mediumFontSize from "../../common/size.css";
+@value colorLoading, colorProfileShadow, colorLightGrey, colorFocus, colorPopupHeader, colorPopupShadow, colorBlack, colorWhite, colorLightGrey from "common/colors.css";
+@value microMargin, mediumMargin, smallMargin, smallFontSize, mediumFontSize from "common/size.css";
 
 .wrap,
 .popupWrap {
