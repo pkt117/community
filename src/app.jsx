@@ -16,6 +16,7 @@ import Navbar from "components/navbar/navbar";
 import Loading from "components/loading/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { loginCheck } from "redux/authState/loginActions";
+import Modify from "pages/post_view/modify/modify";
 
 function App() {
   const location = useLocation();
@@ -58,6 +59,7 @@ function App() {
         <Route path="find_group" element={<FindGroup />} />
         <Route path="free_board" element={<FreeBoard />} />
         <Route path="post_view/:id" element={<PostView />} />
+        <Route path="post_view/:id/modify" element={<Modify />} />
       </Routes>
     </div>
   );

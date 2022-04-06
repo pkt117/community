@@ -108,10 +108,10 @@ const FindGroup = (props) => {
       </div>
       {selectedCategory === "전체"
         ? totalGroups.map((item) => (
-            <GroupList item={item} key={item.createdAt} />
+            <GroupList item={item} key={item.createdAt} joinType={true} />
           ))
         : filterValue.map((item) => (
-            <GroupList item={item} key={item.createdAt} />
+            <GroupList item={item} key={item.createdAt} joinType={true} />
           ))}
     </div>
   );

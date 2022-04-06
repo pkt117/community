@@ -65,12 +65,19 @@ export const getSelectedGroupAsync = (postId) => async (dispatch, getState) => {
   return dispatch(selectedBoard(selectedGroup));
 };
 
-//
+// 그룹 가입
 export const groupJoinAsync = (uid, selected) => async (dispatch) => {
   await dbService.groupJoin(uid, selected);
 
-  await dispatch(getMyGroupAsync());
+  dispatch(getMyGroupAsync());
 };
+
+export const approvalJoinAsync =
+  (uid, selected, approval) => async (dispatch) => {
+    dbService.approvalJoin(uid, selected, approval);
+
+    dispatch(getMyGroupAsync());
+  };
 
 export const selectedBoard = (value) => {
   return {

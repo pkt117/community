@@ -53,11 +53,12 @@ const Chat = ({ selected, userInfo }) => {
   };
 
   const scrollToBottom = () => {
-    if (selected.userCheck)
+    if (selected.userCheck) {
       scrollRef.current.scrollIntoView({
         block: "end",
         inline: "nearest",
       });
+    }
   };
 
   useEffect(() => {
@@ -74,6 +75,8 @@ const Chat = ({ selected, userInfo }) => {
       setMessages(data[0]);
       scrollToBottom();
     });
+
+    return () => setMessages([]);
   }, []);
 
   return (

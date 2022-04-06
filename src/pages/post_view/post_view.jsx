@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styles from "./post_view.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import { getSelectedGroupAsync, groupJoinAsync } from "redux/board/actions";
+import { useParams } from "react-router-dom";
+import {
+  getSelectedGroupAsync,
+  groupJoinAsync,
+  approvalJoinAsync,
+} from "redux/board/actions";
 import { Info, Chat, Board, Album } from "components/post_view";
+import WarningPopup from "components/warning_popup/warning_popup";
 
 const PostView = () => {
   const { selected, userInfo } = useSelector(
@@ -15,12 +20,31 @@ const PostView = () => {
 
   const params = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [selectedButton, setSelectedButton] = useState("정보");
+  const [warning, setWarning] = useState(false);
 
-  const groupJoin = async () => {
-    await dispatch(groupJoinAsync(userInfo.uid, selected));
+  const groupJoin = () => {
+    dispatch(groupJoinAsync(userInfo.uid, selected));
+    dispatch(getSelectedGroupAsync(params.id));
+  };
+
+  const acceptJoin = (value) => {
+    if (selected.currentPersonnel >= selected.personnel) {
+      setWarning(true);
+      let timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setWarning(false);
+      }, 1400);
+    } else {
+      dispatch(approvalJoinAsync(value, selected, "승인"));
+      dispatch(getSelectedGroupAsync(params.id));
+    }
+  };
+
+  const rejectJoin = (value) => {
+    dispatch(approvalJoinAsync(value, selected, "거절"));
     dispatch(getSelectedGroupAsync(params.id));
   };
 
@@ -80,7 +104,13 @@ const PostView = () => {
       </div>
       <div className={styles.wrap}>
         {selectedButton === "정보" && (
-          <Info selected={selected} groupJoin={groupJoin} uid={userInfo.uid} />
+          <Info
+            selected={selected}
+            groupJoin={groupJoin}
+            uid={userInfo.uid}
+            acceptJoin={acceptJoin}
+            rejectJoin={rejectJoin}
+          />
         )}
         {selectedButton === "게시판" && <Board selected={selected} />}
         {selectedButton === "앨범" && <Album selected={selected} />}
@@ -88,6 +118,7 @@ const PostView = () => {
           <Chat selected={selected} userInfo={userInfo} />
         )}
       </div>
+      {warning && <WarningPopup text="모집 정원 초과" />}
     </div>
   );
 };

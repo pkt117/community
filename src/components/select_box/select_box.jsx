@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styles from "./select_box.module.css";
 
-const SelectBox = ({ options, placeholder, getSelectValue }) => {
+const SelectBox = ({
+  options,
+  placeholder,
+  getSelectValue,
+  defaultValue = false,
+}) => {
   const [selectValue, setSelectValue] = useState(null);
   const [onSelect, setOnSelect] = useState(false);
   const [close, setClose] = useState(false);
@@ -38,7 +43,7 @@ const SelectBox = ({ options, placeholder, getSelectValue }) => {
         type="text"
         className={styles.button}
         placeholder={placeholder}
-        value={selectValue ? selectValue : ""}
+        value={selectValue ? selectValue : defaultValue ? defaultValue : ""}
         readOnly
         onClick={() => setOnSelect(true)}
       />

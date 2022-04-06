@@ -24,7 +24,7 @@ export const googleLoginAsync = () => async (dispatch) => {
       loginSuccess({
         uid: user.uid,
         email: user.email,
-        name: user.displayName,
+        name: profile.name,
         profileImg: profile.profileImg,
         intro: profile.intro,
         createdAt: profile.createdAt,

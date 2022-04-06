@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getSelectedGroupAsync } from "redux/board/actions";
 
-const GroupList = ({ item }) => {
+const GroupList = ({ item, joinType = false }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,23 +26,26 @@ const GroupList = ({ item }) => {
           <span className={styles.area__text}>{item.area}</span>
         </div>
         <h1 className={styles.title}>{item.name}</h1>
-        <div className={styles.personnel}>
-          <BsPerson
-            className={
-              item.personnelFull
-                ? `${styles.personnel__icon} ${styles.personnel__full}`
-                : styles.personnel__icon
-            }
-          />
-          <span
-            className={
-              item.personnelFull
-                ? `${styles.personnel__text} ${styles.personnel__full}`
-                : styles.personnel__text
-            }
-          >
-            {item.currentPersonnel} / {item.personnel}
-          </span>
+        <div className={styles.etcWrap}>
+          <div className={styles.personnel}>
+            <BsPerson
+              className={
+                item.currentPersonnel >= item.personnel
+                  ? `${styles.personnel__icon} ${styles.personnel__full}`
+                  : styles.personnel__icon
+              }
+            />
+            <span
+              className={
+                item.currentPersonnel >= item.personnel
+                  ? `${styles.personnel__text} ${styles.personnel__full}`
+                  : styles.personnel__text
+              }
+            >
+              {item.currentPersonnel} / {item.personnel}
+            </span>
+          </div>
+          {joinType && <span className={styles.type}>{item.joinType}</span>}
         </div>
       </div>
     </div>

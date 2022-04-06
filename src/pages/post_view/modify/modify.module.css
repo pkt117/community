@@ -18,6 +18,34 @@
   margin-left: smallMargin;
 }
 
+.input__file {
+  display: none;
+}
+
+.imgButton {
+  width: 85%;
+  height: 8rem;
+  border-radius: microMargin;
+  border: 0;
+  outline: 0;
+  padding: 0;
+  margin: auto;
+  cursor: pointer;
+  background-color: transparent;
+  transition: transform 100ms ease-in-out;
+  box-shadow: colorProfileShadow;
+}
+
+.img {
+  width: 85%;
+  height: 8rem;
+  border-radius: microMargin;
+}
+
+.imgButton:hover {
+  transform: scale(1.01);
+}
+
 .wrap {
   display: flex;
   margin-top: smallMargin;
@@ -116,6 +144,11 @@
 
 .button:hover {
   opacity: 0.8;
+}
+
+.delete {
+  margin-top: smallMargin;
+  background-color: colorFocus;
 }
 
 .joinWrap {

@@ -164,6 +164,7 @@ export default class DbService {
       userList: [{ uid, manager: true }],
       messages: [],
       joinType: value.joinType,
+      joinWaiting: [],
     };
     await setDoc(doc(this.db, "group", randomId), item);
   }
@@ -211,6 +212,7 @@ export default class DbService {
     );
     const data = [];
     const userInfo = [];
+    const joinWaitingInfo = [];
     let userCheck = false;
     const querySnapshot = await getDocs(q);
 
@@ -233,10 +235,21 @@ export default class DbService {
 
       if (item.uid === uid) {
         userCheck = true;
+        if (data[0].userList.indexOf(item) == 0) {
+          for (let i of data[0].joinWaiting) {
+            let profile = await this.getUserInfo(i);
+            joinWaitingInfo.push({
+              name: profile.name,
+              intro: profile.intro,
+              profileImg: profile.profileImg,
+              uid: i,
+            });
+          }
+        }
       }
     }
 
-    const value = { ...data[0], userInfo, userCheck };
+    const value = { ...data[0], userInfo, userCheck, joinWaitingInfo };
 
     return value;
   }
@@ -245,10 +258,35 @@ export default class DbService {
   async groupJoin(uid, selected) {
     const updateRef = doc(this.db, "group", selected.postId);
 
-    await updateDoc(updateRef, {
-      currentPersonnel: selected.currentPersonnel + 1,
-      userList: [...selected.userList, { uid, manager: false }],
-    });
+    if (selected.joinType === "자동 가입") {
+      await updateDoc(updateRef, {
+        currentPersonnel: selected.currentPersonnel + 1,
+        userList: [...selected.userList, { uid, manager: false }],
+      });
+    } else {
+      await updateDoc(updateRef, {
+        joinWaiting: [...selected.joinWaiting, uid],
+      });
+    }
+  }
+
+  approvalJoin(uid, selected, approval) {
+    const updateRef = doc(this.db, "group", selected.postId);
+    const index = selected.joinWaiting.indexOf(uid);
+    selected.joinWaiting.splice(index, 1);
+    switch (approval) {
+      case "승인":
+        updateDoc(updateRef, {
+          joinWaiting: selected.joinWaiting,
+          userList: [...selected.userList, { uid, manager: false }],
+          currentPersonnel: selected.currentPersonnel + 1,
+        });
+
+      case "거절":
+        updateDoc(updateRef, {
+          joinWaiting: selected.joinWaiting,
+        });
+    }
   }
 
   // 유저 정보 가져오기

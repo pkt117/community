@@ -38,7 +38,7 @@
   width: 65%;
   max-width: 240px;
   box-shadow: colorPopupShadow;
-  border: 1px soild colorBlack;
+
   border-radius: microMargin;
   z-index: 9999;
 }

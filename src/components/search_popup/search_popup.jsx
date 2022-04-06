@@ -3,9 +3,9 @@ import styles from "./search_popup.module.css";
 import areaData from "data/area_data";
 import Search from "components/search/search";
 
-const SearchPopup = ({ getSelectValue }) => {
+const SearchPopup = ({ getSelectValue, selectedValue = null }) => {
   const [data, setData] = useState([]);
-  const [selectValue, setSelectValue] = useState(null);
+  const [selectValue, setSelectValue] = useState(selectedValue);
   const [onSearch, setOnSearch] = useState(false);
   const [close, setClose] = useState(false);
   const [searchList, setSearchList] = useState([]);

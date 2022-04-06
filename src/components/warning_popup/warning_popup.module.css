@@ -1,0 +1,56 @@
+@value colorLoading, colorPopupHeader, colorPopupShadow, colorLightGrey, colorBlack, colorWhite, colorLightGrey from "common/colors.css";
+@value microMargin, smallMargin, smallFontSize from "common/size.css";
+
+.warn {
+  width: 65%;
+  max-width: 240px;
+  box-shadow: colorPopupShadow;
+  border: 1px solid colorLightGrey;
+  border-radius: microMargin;
+  z-index: 9999;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  animation: fadeInOut 1500ms;
+}
+
+.header {
+  background-color: colorPopupHeader;
+  padding: microMargin;
+  border-radius: microMargin microMargin 0 0;
+}
+
+.title {
+  font-size: calc(smallFontSize * 0.8);
+  font-weight: bold;
+  margin-left: calc(microMargin / 2);
+}
+
+.textWrap {
+  width: 100%;
+}
+
+.text {
+  text-align: center;
+  font-size: smallFontSize;
+  font-weight: bold;
+  margin: 0;
+  padding: smallMargin;
+  background-color: colorWhite;
+  border-radius: 0 0 microMargin microMargin;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

@@ -1,4 +1,4 @@
-@value colorAreaText, colorFocus, colorGroupHover from "common/colors.css";
+@value colorAreaText, colorFocus, colorGroupHover, colorLightGrey from "common/colors.css";
 @value smallMargin, microMargin, smallFontSize, mediumFontSize from "common/size.css";
 
 .list {
@@ -67,4 +67,15 @@
 
 .personnel__full {
   color: colorFocus;
+}
+
+.etcWrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.type {
+  font-size: smallFontSize;
+  color: colorLightGrey;
 }
