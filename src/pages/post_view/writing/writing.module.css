@@ -1,0 +1,82 @@
+@value colorLightGrey, colorFocus, colorBlack, colorWhite, colorGroupButton from "common/colors.css";
+@value smallMargin, microMargin, smallFontSize from "common/size.css";
+
+.writing {
+  display: flex;
+  flex-direction: column;
+  padding: smallMargin;
+}
+
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: microMargin;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border: 1px solid colorLightGrey;
+
+  padding: microMargin;
+  font-size: smallFontSize;
+  width: 60%;
+}
+
+.buttonWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.check {
+  padding: microMargin;
+  cursor: pointer;
+  outline: none;
+  border: 1px solid colorLightGrey;
+  display: flex;
+}
+
+.checkTrue {
+  background-color: colorFocus;
+  border-color: colorFocus;
+}
+
+.icon {
+  color: colorLightGrey;
+}
+
+.checkIcon {
+  color: colorBlack;
+}
+
+.buttonText {
+  font-size: calc(smallFontSize / 2);
+  font-weight: bold;
+  margin-top: calc(microMargin / 2);
+}
+
+.content {
+  padding: microMargin;
+  resize: none;
+  height: 10rem;
+  border: 1px solid colorLightGrey;
+}
+
+.submit {
+  cursor: pointer;
+  outline: 0;
+  border: 0;
+  padding: microMargin smallMargin;
+  background-color: colorGroupButton;
+  border-radius: microMargin;
+  color: colorWhite;
+  font-weight: bold;
+  margin-top: smallMargin;
+}
+
+.submit:hover {
+  opacity: 0.7;
+}

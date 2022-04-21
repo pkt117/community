@@ -21,7 +21,9 @@ const PostView = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-  const [selectedButton, setSelectedButton] = useState("정보");
+  let localSelected = localStorage.getItem("selected");
+  localSelected = JSON.parse(localSelected);
+  const [selectedButton, setSelectedButton] = useState(localSelected);
   const [warning, setWarning] = useState(false);
 
   const groupJoin = () => {
@@ -52,13 +54,28 @@ const PostView = () => {
   //   dispatch(getSelectedGroupAsync(params.id));
   // }, []);
 
+  // useEffect(() => {
+  //   let localSelected = localStorage.getItem("selected");
+
+  //   if (localSelected != null) {
+  //     localSelected = JSON.parse(localSelected);
+  //     console.log(localSelected);
+  //     setSelectedButton(localSelected);
+  //   }
+
+  //   // return () => localStorage.setItem("selected", JSON.stringify("정보"));
+  // }, []);
+
   return (
     <div className={styles.postView}>
       <div className={styles.navWrap}>
         <h1 className={styles.title}>{selected.name}</h1>
         <nav className={styles.navbar}>
           <button
-            onClick={() => setSelectedButton("정보")}
+            onClick={() => {
+              setSelectedButton("정보");
+              localStorage.setItem("selected", JSON.stringify("정보"));
+            }}
             className={
               selectedButton === "정보"
                 ? `${styles.link} ${styles.active}`
@@ -69,7 +86,11 @@ const PostView = () => {
           </button>
 
           <button
-            onClick={() => setSelectedButton("게시판")}
+            onClick={() => {
+              setSelectedButton("게시판");
+              dispatch(getSelectedGroupAsync(params.id));
+              localStorage.setItem("selected", JSON.stringify("게시판"));
+            }}
             className={
               selectedButton === "게시판"
                 ? `${styles.link} ${styles.active}`
@@ -80,7 +101,10 @@ const PostView = () => {
           </button>
 
           <button
-            onClick={() => setSelectedButton("앨범")}
+            onClick={() => {
+              setSelectedButton("앨범");
+              localStorage.setItem("selected", JSON.stringify("앨범"));
+            }}
             className={
               selectedButton === "앨범"
                 ? `${styles.link} ${styles.active}`
@@ -90,7 +114,10 @@ const PostView = () => {
             앨범
           </button>
           <button
-            onClick={() => setSelectedButton("채팅")}
+            onClick={() => {
+              setSelectedButton("채팅");
+              localStorage.setItem("selected", JSON.stringify("채팅"));
+            }}
             className={
               selectedButton === "채팅"
                 ? `${styles.link} ${styles.active}`

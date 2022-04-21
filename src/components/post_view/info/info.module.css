@@ -20,6 +20,7 @@
 
 .content {
   white-space: pre-wrap;
+  word-wrap: break-word;
   line-height: 150%;
   font-size: smallFontSize;
 }

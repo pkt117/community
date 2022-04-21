@@ -4,8 +4,9 @@ import styles from "./modify.module.css";
 import Select from "components/select_box/select_box";
 import AreaSearch from "components/search_popup/search_popup";
 import { useDispatch, useSelector } from "react-redux";
-import { createGroupAsync } from "redux/board/actions";
+import { deleteGroupAsync, modifyGroupAsync } from "redux/board/actions";
 import { useNavigate } from "react-router-dom";
+import ConfirmPopup from "components/confirm_popup/confirm_popup";
 
 const Modify = (props) => {
   const { selected, userInfo } = useSelector(
@@ -39,6 +40,7 @@ const Modify = (props) => {
   const [checkText, setCheckText] = useState("");
   const [joinType, setJoinType] = useState(selected.joinType);
   const [content, setContent] = useState(selected.content);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const fileRef = useRef();
 
@@ -47,7 +49,7 @@ const Modify = (props) => {
   const getPersonnel = (value) =>
     setPersonnelValue(parseInt(value.replace("명", "")));
 
-  const onClickButton = () => {
+  const onClickButton = async () => {
     if (name.trim() === "") {
       setCheck(true);
       setCheckText("모임 이름을 입력해주세요");
@@ -69,8 +71,8 @@ const Modify = (props) => {
         content,
         joinType,
       };
-      //   dispatch(createGroupAsync(value, imageFile));
-      //   navigate("/my_group");
+      await dispatch(modifyGroupAsync(value, imgFile, selected.postId));
+      navigate(-1);
     }
   };
 
@@ -95,7 +97,18 @@ const Modify = (props) => {
     setJoinType(event.target.value);
   };
 
-  const onDelete = () => {};
+  const onDelete = () => {
+    setConfirmOpen(true);
+  };
+
+  const confirmCheck = async () => {
+    await dispatch(deleteGroupAsync(selected.postId));
+    navigate(-2);
+  };
+
+  const confirmCancel = () => {
+    setConfirmOpen(false);
+  };
 
   useEffect(() => {
     if (personnelSetting == "") {
@@ -215,6 +228,12 @@ const Modify = (props) => {
           게시글 삭제
         </button>
       </div>
+      <ConfirmPopup
+        open={confirmOpen}
+        confirmCheck={confirmCheck}
+        confirmCancel={confirmCancel}
+        text="게시글을 삭제하시겠습니까?"
+      />
     </div>
   );
 };

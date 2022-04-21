@@ -1,0 +1,155 @@
+@value colorGroupButton, colorWhite, colorBlack,colorShadow, colorLightGrey,colorGroupButton, colorFocus from "common/colors.css";
+@value smallMargin, mediumMargin, microMargin, smallFontSize, xsmallFontSize from "common/size.css";
+
+.board {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.board::-webkit-scrollbar {
+  display: none;
+}
+
+.header {
+  display: flex;
+  border-bottom: 1px solid colorLightGrey;
+  padding: 0 smallMargin;
+}
+
+.header__title {
+  font-size: xsmallFontSize;
+}
+
+.body {
+  min-height: 18rem;
+  /* flex-basis: 60%; */
+  padding: 0 smallMargin;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-top: smallMargin;
+}
+
+.profileImg {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.profileName {
+  font-size: calc(smallFontSize * 0.9);
+  margin: microMargin;
+}
+
+.date {
+  font-size: calc(smallFontSize * 0.9);
+  margin: microMargin;
+}
+
+.control {
+  position: absolute;
+  right: 0;
+  outline: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.control__icon {
+  font-size: xsmallFontSize;
+}
+
+.control:hover .control__icon {
+  transform: scale(1.01);
+}
+
+.title {
+  font-size: xsmallFontSize;
+}
+
+.content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.comment {
+  min-height: 11rem;
+}
+
+.comment__title {
+  border-top: 1px solid colorLightGrey;
+  border-bottom: 1px solid colorLightGrey;
+  font-size: smallFontSize;
+  padding: calc(smallMargin * 0.7) smallMargin;
+}
+
+.comment__inputWrap {
+  display: flex;
+  position: sticky;
+  bottom: 0;
+  background-color: colorWhite;
+  padding: microMargin 0;
+}
+
+.comment__input {
+  flex-basis: 85%;
+  margin: 0 microMargin;
+  padding: microMargin;
+  border: 1px solid colorBlack;
+}
+
+.comment__button {
+  flex-basis: 12%;
+  background-color: colorGroupButton;
+  color: colorWhite;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  margin-right: microMargin;
+}
+
+.comment__button:hover {
+  opacity: 0.8;
+}
+
+.comment__list {
+  border-top: 1px solid colorLightGrey;
+  padding: smallMargin;
+}
+
+.comment__list:first-of-type {
+  border-top: none;
+}
+
+.comment__list:last-of-type {
+  border-bottom: 1px solid colorLightGrey;
+}
+
+.comment__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.comment__profile {
+  display: flex;
+  align-items: center;
+}
+
+.comment__profileImg {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+
+.comment__profileName {
+  font-size: smallFontSize;
+  margin-left: microMargin;
+}

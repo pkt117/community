@@ -3,6 +3,7 @@ import styles from "./find_group.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import GroupList from "components/group_list/group_list";
 import { getTotalGroupAsync } from "redux/board/actions";
+import Search from "components/search/search";
 
 const FindGroup = (props) => {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ const FindGroup = (props) => {
 
   const [filterValue, setFilterValue] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("전체");
+  const [searchValue, setSearchValue] = useState([]);
+  const [reset, setReset] = useState(false);
   const filterList = [
     "전체",
     "스터디",
@@ -67,6 +70,8 @@ const FindGroup = (props) => {
   const onThrottleDragMove = throttle(onDragMove, delay);
 
   const clickFilter = (value) => {
+    setSearchValue([]);
+    setReset(true);
     if (value === "전체") {
       setFilterValue(totalGroups);
       setSelectedCategory("전체");
@@ -76,12 +81,28 @@ const FindGroup = (props) => {
     }
   };
 
+  const onSearch = (event, value) => {
+    event.preventDefault();
+    setReset(false);
+    setSearchValue(
+      totalGroups.filter((item) => item.name.replace(/ /g, "").includes(value))
+    );
+    setSelectedCategory("전체");
+  };
+
   useEffect(() => {
     dispatch(getTotalGroupAsync());
   }, []);
 
   return (
     <div className={styles.findGroup}>
+      <div className={styles.search}>
+        <Search
+          placeholder="그룹 검색"
+          onSearchClick={onSearch}
+          reset={reset}
+        />
+      </div>
       <div
         className={styles.filter}
         ref={scrollRef}
@@ -106,7 +127,11 @@ const FindGroup = (props) => {
           );
         })}
       </div>
-      {selectedCategory === "전체"
+      {searchValue.length !== 0
+        ? searchValue.map((item) => (
+            <GroupList item={item} key={item.createdAt} joinType={true} />
+          ))
+        : selectedCategory === "전체"
         ? totalGroups.map((item) => (
             <GroupList item={item} key={item.createdAt} joinType={true} />
           ))

@@ -69,14 +69,39 @@ export const getSelectedGroupAsync = (postId) => async (dispatch, getState) => {
 export const groupJoinAsync = (uid, selected) => async (dispatch) => {
   await dbService.groupJoin(uid, selected);
 
-  dispatch(getMyGroupAsync());
+  return dispatch(getMyGroupAsync());
 };
 
-export const approvalJoinAsync =
-  (uid, selected, approval) => async (dispatch) => {
-    dbService.approvalJoin(uid, selected, approval);
+// 가입 승인
+export const approvalJoinAsync = (uid, selected, approval) => (dispatch) => {
+  dbService.approvalJoin(uid, selected, approval);
 
-    dispatch(getMyGroupAsync());
+  return dispatch(getMyGroupAsync());
+};
+
+// 게시글 수정
+export const modifyGroupAsync =
+  (value, imgFile, postId) => async (dispatch) => {
+    await dbService.modifyGroup(value, imgFile, postId);
+
+    return dispatch(getSelectedGroupAsync(postId));
+  };
+
+// 게시글 삭제
+export const deleteGroupAsync = (postId) => (dispatch) => {
+  dbService.deleteGroup(postId);
+
+  dispatch(selectedBoard([]));
+
+  return dispatch(getMyGroupAsync());
+};
+
+// 그룹 내 게시글 작성
+export const writingBoardAsync =
+  (notice, title, content, postId, userInfo) => async (dispatch) => {
+    await dbService.writingBoard(notice, title, content, postId, userInfo);
+
+    return dispatch(getSelectedGroupAsync(postId));
   };
 
 export const selectedBoard = (value) => {

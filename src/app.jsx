@@ -6,9 +6,11 @@ import {
   FindGroup,
   MyGroup,
   CreateGroup,
-  FreeBoard,
   Join,
   PostView,
+  Modify,
+  Writing,
+  Board,
 } from "./pages";
 
 import Header from "components/header/header";
@@ -16,7 +18,6 @@ import Navbar from "components/navbar/navbar";
 import Loading from "components/loading/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { loginCheck } from "redux/authState/loginActions";
-import Modify from "pages/post_view/modify/modify";
 
 function App() {
   const location = useLocation();
@@ -57,9 +58,10 @@ function App() {
         <Route path="my_group" element={<MyGroup />} />
         <Route path="create_group" element={<CreateGroup />} />
         <Route path="find_group" element={<FindGroup />} />
-        <Route path="free_board" element={<FreeBoard />} />
         <Route path="post_view/:id" element={<PostView />} />
         <Route path="post_view/:id/modify" element={<Modify />} />
+        <Route path="post_view/:id/writing" element={<Writing />} />
+        <Route path="post_view/:id/board/:board_id" element={<Board />} />
       </Routes>
     </div>
   );

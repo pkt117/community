@@ -12,8 +12,15 @@ import {
   orderBy,
   limit,
   onSnapshot,
+  deleteDoc,
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 export default class DbService {
   constructor() {
@@ -165,6 +172,8 @@ export default class DbService {
       messages: [],
       joinType: value.joinType,
       joinWaiting: [],
+      writingBoard: [],
+      notice: [],
     };
     await setDoc(doc(this.db, "group", randomId), item);
   }
@@ -251,6 +260,14 @@ export default class DbService {
 
     const value = { ...data[0], userInfo, userCheck, joinWaitingInfo };
 
+    value.notice.sort(function (a, b) {
+      return b.key - a.key;
+    });
+
+    value.writingBoard.sort(function (a, b) {
+      return b.key - a.key;
+    });
+
     return value;
   }
 
@@ -270,6 +287,7 @@ export default class DbService {
     }
   }
 
+  // 가입 승인
   approvalJoin(uid, selected, approval) {
     const updateRef = doc(this.db, "group", selected.postId);
     const index = selected.joinWaiting.indexOf(uid);
@@ -286,6 +304,110 @@ export default class DbService {
         updateDoc(updateRef, {
           joinWaiting: selected.joinWaiting,
         });
+    }
+  }
+
+  // 게시글 수정
+  async modifyGroup(value, imgFile, postId) {
+    const updateRef = doc(this.db, "group", postId);
+    if (imgFile) {
+      const storageRef = ref(this.storage, `group/${postId}/background.png`);
+      await uploadBytes(storageRef, imgFile);
+      const storageUrl = await getDownloadURL(storageRef);
+
+      updateDoc(updateRef, {
+        name: value.name,
+        category: value.category,
+        area: value.area,
+        personnel: value.personnel,
+        content: value.content,
+        joinType: value.joinType,
+        postImage: storageUrl,
+      });
+    } else {
+      updateDoc(updateRef, {
+        name: value.name,
+        category: value.category,
+        area: value.area,
+        personnel: value.personnel,
+        content: value.content,
+        joinType: value.joinType,
+      });
+    }
+  }
+
+  // 게시글 삭제
+
+  async deleteGroup(postId) {
+    await deleteDoc(doc(this.db, "group", postId));
+
+    const storageDeleteRef = ref(
+      this.storage,
+      `group/${postId}/background.png`
+    );
+
+    deleteObject(storageDeleteRef);
+  }
+
+  // 그룹 내 게시글 작성
+  async writingBoard(notice, title, content, postId, userInfo) {
+    const q = query(
+      collection(this.db, "group"),
+      where("postId", "==", postId)
+    );
+
+    const randomId =
+      Math.random().toString(36).substring(2, 12) +
+      Math.random().toString(36).substring(2, 12);
+
+    const data = [];
+    let today = new Date();
+
+    let month = today.getMonth() + 1;
+    let date = today.getDate();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+
+    if (hours < 10) hours = `0${hours}`;
+    if (minutes < 10) minutes = `0${minutes}`;
+    if (month < 10) month = `0${month}`;
+    if (date < 10) date = `0${date}`;
+
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => data.push(doc.data()));
+    const updateRef = doc(this.db, "group", postId);
+
+    if (notice) {
+      data[0].notice.unshift({
+        key: today.getTime(),
+        title,
+        content,
+        comment: [],
+        createTime: `${hours}:${minutes}`,
+        createDate: `${month}/${date}`,
+        userInfo,
+        postId: randomId,
+      });
+
+      updateDoc(updateRef, {
+        notice: data[0].notice,
+      });
+    } else {
+      data[0].writingBoard.unshift({
+        key: today.getTime(),
+        title,
+        content,
+        comment: [],
+        createTime: `${hours}:${minutes}`,
+        createDate: `${month}/${date}`,
+        userInfo,
+        postId: randomId,
+      });
+
+      updateDoc(updateRef, {
+        writingBoard: data[0].writingBoard,
+      });
     }
   }
 

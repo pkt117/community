@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./search.module.css";
 
-const Search = ({ onSearchClick, placeholder }) => {
+const Search = ({ onSearchClick, placeholder, reset = false }) => {
   const searchRef = useRef();
+
+  const [text, setText] = useState("");
 
   return (
     <form
@@ -13,7 +15,12 @@ const Search = ({ onSearchClick, placeholder }) => {
         type="text"
         ref={searchRef}
         className={styles.input}
+        value={reset ? "" : text}
         placeholder={placeholder}
+        onChange={(event) => {
+          setText(searchRef.current.value);
+          onSearchClick(event, searchRef.current.value);
+        }}
       />
     </form>
   );

@@ -12,6 +12,7 @@ const GroupList = ({ item, joinType = false }) => {
 
   const onClickList = async () => {
     await dispatch(getSelectedGroupAsync(item.postId));
+    localStorage.setItem("selected", JSON.stringify("정보"));
     navigate(`/post_view/${item.postId}`);
   };
 

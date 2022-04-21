@@ -22,15 +22,6 @@ const Navbar = ({}) => {
       >
         모임 찾기
       </NavLink>
-
-      <NavLink
-        to="/free_board"
-        className={({ isActive }) =>
-          isActive ? `${styles.link} ${styles.active}` : styles.link
-        }
-      >
-        자유게시판
-      </NavLink>
     </nav>
   );
 };
