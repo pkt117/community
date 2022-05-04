@@ -45,6 +45,7 @@ const Chat = ({ selected, userInfo }) => {
     });
 
     inputRef.current.value = "";
+    inputRef.current.focus();
   };
 
   const onChange = (event) => {

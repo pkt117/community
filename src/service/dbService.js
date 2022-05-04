@@ -20,6 +20,7 @@ import {
   uploadBytes,
   getDownloadURL,
   deleteObject,
+  listAll,
 } from "firebase/storage";
 
 export default class DbService {
@@ -174,6 +175,7 @@ export default class DbService {
       joinWaiting: [],
       writingBoard: [],
       notice: [],
+      album: [],
     };
     await setDoc(doc(this.db, "group", randomId), item);
   }
@@ -341,12 +343,21 @@ export default class DbService {
   async deleteGroup(postId) {
     await deleteDoc(doc(this.db, "group", postId));
 
-    const storageDeleteRef = ref(
-      this.storage,
-      `group/${postId}/background.png`
-    );
+    this.deleteStorage(`group/${postId}`);
+  }
+  // 스토리지 삭제
+  deleteStorage(path) {
+    const listRef = ref(this.storage, path);
 
-    deleteObject(storageDeleteRef);
+    listAll(listRef).then((res) => {
+      res.prefixes.forEach((folderRef) => {
+        this.deleteStorage(folderRef.fullPath);
+      });
+      res.items.forEach((itemRef) => {
+        const storageDeleteRef = ref(this.storage, itemRef.fullPath);
+        deleteObject(storageDeleteRef);
+      });
+    });
   }
 
   // 그룹 내 게시글 작성
@@ -409,6 +420,75 @@ export default class DbService {
         writingBoard: data[0].writingBoard,
       });
     }
+  }
+
+  // 그룹 탈퇴
+  async groupLeave(postId, uid) {
+    const q = query(
+      collection(this.db, "group"),
+      where("postId", "==", postId)
+    );
+    const data = [];
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => data.push(doc.data()));
+    const userList = data[0].userList.filter((item) => item.uid !== uid);
+    const updateRef = doc(this.db, "group", postId);
+
+    updateDoc(updateRef, {
+      userList,
+      currentPersonnel: data[0].currentPersonnel - 1,
+    });
+  }
+
+  // 앨범 추가
+  async albumAdd(imgFile, userInfo, postId) {
+    const q = query(
+      collection(this.db, "group"),
+      where("postId", "==", postId)
+    );
+    const data = [];
+    const randomId =
+      Math.random().toString(36).substring(2, 12) +
+      Math.random().toString(36).substring(2, 12);
+
+    let today = new Date();
+    let month = today.getMonth() + 1;
+    let date = today.getDate();
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+
+    if (hours < 10) hours = `0${hours}`;
+    if (minutes < 10) minutes = `0${minutes}`;
+    if (month < 10) month = `0${month}`;
+    if (date < 10) date = `0${date}`;
+
+    const storageRef = ref(
+      this.storage,
+      `group/${postId}/album/${randomId}/albumImg.png`
+    );
+    await uploadBytes(storageRef, imgFile);
+    const storageUrl = await getDownloadURL(storageRef);
+
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => data.push(doc.data()));
+
+    data[0].album.unshift({
+      key: today.getTime(),
+      imgUrl: storageUrl,
+      postId: randomId,
+      userInfo,
+      comment: [],
+      createTime: `${hours}:${minutes}`,
+      createDate: `${month}/${date}`,
+    });
+
+    const updateRef = doc(this.db, "group", postId);
+
+    updateDoc(updateRef, {
+      album: data[0].album,
+    });
   }
 
   // 유저 정보 가져오기

@@ -1,0 +1,78 @@
+@value colorGroupButton, colorWhite, colorShadow, colorLightGrey from "common/colors.css";
+@value microMargin, smallMargin, mediumFontSize, mediumMargin from "common/size.css";
+
+.album {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.album::-webkit-scrollbar {
+  display: none;
+}
+
+.list {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: microMargin;
+  cursor: pointer;
+}
+
+.list:nth-child(odd) {
+  padding-left: smallMargin;
+}
+
+.list:nth-child(even) {
+  padding-right: smallMargin;
+}
+
+.list:hover {
+  transform: scale(1.01);
+}
+
+.disabledList {
+  cursor: default;
+}
+
+.disabledList:hover {
+  transform: none;
+}
+
+.listImg {
+  width: 100%;
+  padding: 0;
+  height: 12rem;
+  border: 0.1px solid colorLightGrey;
+}
+
+.writing {
+  position: absolute;
+  bottom: mediumMargin;
+  right: mediumMargin;
+  border: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: colorGroupButton;
+  color: colorWhite;
+  font-weight: bold;
+  box-shadow: colorShadow;
+  font-size: mediumFontSize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.writing:hover {
+  transform: scale(1.05);
+}

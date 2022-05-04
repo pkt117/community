@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./info.module.css";
 import { FaCrown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import ConfirmPopup from "components/confirm_popup/confirm_popup";
+import { useDispatch } from "react-redux";
+import { groupLeaveAsync } from "redux/board/actions";
 
-const Info = ({ selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
+const Info = ({ postId, selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const onModify = () => {
     navigate("modify");
+  };
+
+  const confirmCheck = () => {
+    dispatch(groupLeaveAsync(postId, uid));
+    setConfirmOpen(false);
+  };
+
+  const confirmCancel = () => {
+    setConfirmOpen(false);
   };
 
   return (
@@ -47,7 +62,9 @@ const Info = ({ selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
         {selected.userInfo ? (
           selected.userInfo.map((item) => (
             <div className={styles.userList} key={item.uid}>
-              <img src={item.profileImg} className={styles.profileImg} />
+              <div className={styles.profileImgWrap}>
+                <img src={item.profileImg} className={styles.profileImg} />
+              </div>
               <div className={styles.userInfo}>
                 <span className={styles.userName}>{item.name}</span>
                 <span className={styles.userIntro}>{item.intro}</span>
@@ -60,7 +77,7 @@ const Info = ({ selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
         )}
       </div>
 
-      {selected.userCheck && selected.userList[0].uid === uid ? (
+      {selected.userCheck && selected.userList[0].uid === uid && (
         <>
           {selected.joinWaitingInfo.length !== 0 && (
             <div className={styles.count}>
@@ -96,9 +113,27 @@ const Info = ({ selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
             </button>
           </div>
         </>
-      ) : (
-        <></>
       )}
+
+      {selected.userCheck && selected.userList[0].uid !== uid && (
+        <>
+          <div className={styles.leave}>
+            <button
+              className={styles.leaveBtn}
+              onClick={() => setConfirmOpen(true)}
+            >
+              그룹 탈퇴
+            </button>
+          </div>
+        </>
+      )}
+
+      <ConfirmPopup
+        open={confirmOpen}
+        confirmCheck={confirmCheck}
+        confirmCancel={confirmCancel}
+        text="그룹 탈퇴 하시겠습니까?"
+      />
     </>
   );
 };

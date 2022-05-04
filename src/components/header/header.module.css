@@ -11,9 +11,15 @@
 }
 
 .logo {
-  margin-left: mediumMargin;
-
+  margin-left: smallMargin;
   font-size: smallFontSize;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo__icon {
+  margin-right: calc(microMargin / 2);
 }
 
 .button {

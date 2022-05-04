@@ -9,6 +9,7 @@ import {
 } from "redux/board/actions";
 import { Info, Chat, Board, Album } from "components/post_view";
 import WarningPopup from "components/warning_popup/warning_popup";
+import Loading from "components/loading/loading";
 
 const PostView = () => {
   const { selected, userInfo } = useSelector(
@@ -25,6 +26,7 @@ const PostView = () => {
   localSelected = JSON.parse(localSelected);
   const [selectedButton, setSelectedButton] = useState(localSelected);
   const [warning, setWarning] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const groupJoin = () => {
     dispatch(groupJoinAsync(userInfo.uid, selected));
@@ -50,21 +52,11 @@ const PostView = () => {
     dispatch(getSelectedGroupAsync(params.id));
   };
 
-  // useEffect(() => {
-  //   dispatch(getSelectedGroupAsync(params.id));
-  // }, []);
-
-  // useEffect(() => {
-  //   let localSelected = localStorage.getItem("selected");
-
-  //   if (localSelected != null) {
-  //     localSelected = JSON.parse(localSelected);
-  //     console.log(localSelected);
-  //     setSelectedButton(localSelected);
-  //   }
-
-  //   // return () => localStorage.setItem("selected", JSON.stringify("정보"));
-  // }, []);
+  useEffect(async () => {
+    setLoading(true);
+    await dispatch(getSelectedGroupAsync(params.id));
+    setLoading(false);
+  }, []);
 
   return (
     <div className={styles.postView}>
@@ -132,6 +124,7 @@ const PostView = () => {
       <div className={styles.wrap}>
         {selectedButton === "정보" && (
           <Info
+            postId={params.id}
             selected={selected}
             groupJoin={groupJoin}
             uid={userInfo.uid}
@@ -140,12 +133,15 @@ const PostView = () => {
           />
         )}
         {selectedButton === "게시판" && <Board selected={selected} />}
-        {selectedButton === "앨범" && <Album selected={selected} />}
+        {selectedButton === "앨범" && (
+          <Album selected={selected} userInfo={userInfo} postId={params.id} />
+        )}
         {selectedButton === "채팅" && (
           <Chat selected={selected} userInfo={userInfo} />
         )}
       </div>
       {warning && <WarningPopup text="모집 정원 초과" />}
+      {loading && <Loading />}
     </div>
   );
 };

@@ -1,0 +1,133 @@
+@value colorLoading, colorProfileShadow, colorLightGrey, colorFocus, colorPopupHeader, colorPopupShadow, colorBlack, colorWhite, colorLightGrey from "common/colors.css";
+@value microMargin, mediumMargin, smallMargin, smallFontSize, mediumFontSize from "common/size.css";
+
+.wrap,
+.popupWrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 9999;
+}
+
+.wrap {
+  display: none;
+}
+
+.popupWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: colorLoading;
+}
+
+.openWrap {
+  display: block;
+}
+
+.openPopupWrap {
+  animation: open 400ms;
+}
+
+.closePopupWrap {
+  animation: close 500ms;
+}
+
+.popup {
+  width: 90%;
+  box-shadow: colorPopupShadow;
+  border: 1px soild colorBlack;
+  border-radius: microMargin;
+  z-index: 9999;
+}
+
+.header {
+  background-color: colorPopupHeader;
+  padding: microMargin;
+  border-radius: microMargin microMargin 0 0;
+}
+
+.title {
+  font-size: calc(smallFontSize * 0.8);
+  font-weight: bold;
+  margin-left: calc(microMargin / 2);
+}
+
+.textWrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: colorWhite;
+  padding: smallMargin;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border: 1px solid colorLightGrey;
+
+  padding: microMargin;
+  font-size: smallFontSize;
+  width: 60%;
+  margin-bottom: microMargin;
+}
+
+.content {
+  padding: microMargin;
+  resize: none;
+  outline: none;
+  height: 10rem;
+  border: 1px solid colorLightGrey;
+}
+
+.buttonWrap {
+  width: 100%;
+  border-top: 1px solid colorLightGrey;
+}
+
+.button {
+  border: 0;
+  width: 50%;
+  padding: microMargin;
+  cursor: pointer;
+  background-color: colorWhite;
+}
+
+.button:first-child {
+  border-right: 1px solid colorLightGrey;
+  border-radius: 0 0 0 microMargin;
+}
+
+.button:last-child {
+  border-radius: 0 0 microMargin 0;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

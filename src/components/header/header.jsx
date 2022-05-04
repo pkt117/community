@@ -62,7 +62,10 @@ const Header = (props) => {
   return (
     <>
       <div className={styles.header}>
-        <h1 className={styles.logo}>사이트이름</h1>
+        <h1 className={styles.logo}>
+          <img src="favicon.png" className={styles.logo__icon} />
+          group catch
+        </h1>
         <button
           className={styles.button}
           onClick={clickLoginButton}

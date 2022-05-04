@@ -18,6 +18,7 @@ import Navbar from "components/navbar/navbar";
 import Loading from "components/loading/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { loginCheck } from "redux/authState/loginActions";
+import Album from "pages/post_view/album/album";
 
 function App() {
   const location = useLocation();
@@ -62,6 +63,7 @@ function App() {
         <Route path="post_view/:id/modify" element={<Modify />} />
         <Route path="post_view/:id/writing" element={<Writing />} />
         <Route path="post_view/:id/board/:board_id" element={<Board />} />
+        <Route path="post_view/:id/album/:album_id" element={<Album />} />
       </Routes>
     </div>
   );

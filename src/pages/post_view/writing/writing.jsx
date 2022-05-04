@@ -41,6 +41,7 @@ const Writing = (props) => {
           placeholder="제목을 입력해 주세요."
           className={styles.input}
           ref={titleRef}
+          maxLength="30"
         />
         {selected.userCheck && selected.userList[0].uid === userInfo.uid ? (
           <div className={styles.buttonWrap}>

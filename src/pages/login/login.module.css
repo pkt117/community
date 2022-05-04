@@ -1,5 +1,5 @@
 @value colorLightGrey, colorPlaceholder, colorFocus, colorAuthButton, colorWhite, colorTest, colorGoogle from "common/colors.css";
-@value smallMargin, mediumMargin, microMargin, smallFontSize, mediumFontSize from "common/size.css";
+@value smallMargin, mediumMargin, microMargin, smallFontSize, xsmallFontSize, mediumFontSize from "common/size.css";
 
 .login {
   width: 100%;
@@ -8,6 +8,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.title__icon {
+  width: xsmallFontSize;
 }
 
 .inputWrap {

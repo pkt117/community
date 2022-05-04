@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./board.module.css";
+import { AiOutlineComment } from "react-icons/ai";
 
 const Board = ({ selected }) => {
   const navigate = useNavigate();
@@ -10,7 +11,8 @@ const Board = ({ selected }) => {
   };
 
   const onBoard = (item, type) => {
-    navigate(`board/${item.postId}`, { state: { item, type } });
+    if (selected.userCheck)
+      navigate(`board/${item.postId}`, { state: { item, type } });
   };
 
   const getTime = (item) => {
@@ -36,18 +38,26 @@ const Board = ({ selected }) => {
     <div className={styles.wrap}>
       {selected.notice.map((item) => (
         <div
-          className={styles.notice}
+          className={
+            selected.userCheck
+              ? styles.notice
+              : `${styles.notice} ${styles.disabledWrap}`
+          }
           key={item.key}
           onClick={() => onBoard(item, "notice")}
         >
-          <h1 className={styles.title}>
-            <span className={styles.notice__title}>[공지]</span> {item.title}
+          <h1 className={`${styles.title} ${styles.notice__title}`}>
+            <span className={styles.notice__subtitle}>[공지]</span> {item.title}
           </h1>
         </div>
       ))}
       {selected.writingBoard.map((item) => (
         <div
-          className={styles.board}
+          className={
+            selected.userCheck
+              ? styles.board
+              : `${styles.board} ${styles.disabledWrap}`
+          }
           key={item.key}
           onClick={() => onBoard(item, "writingBoard")}
         >
@@ -65,14 +75,16 @@ const Board = ({ selected }) => {
             <h1 className={styles.title}>{item.title}</h1>
             <p className={styles.content}>{item.content}</p>
           </section>
+          <div className={styles.commentWrap}>
+            <AiOutlineComment className={styles.commentIcon} />
+            <span className={styles.commentLength}>{item.comment.length}</span>
+          </div>
         </div>
       ))}
-      {selected.userCheck ? (
+      {selected.userCheck && (
         <button className={styles.writing} onClick={onWriting}>
           글쓰기
         </button>
-      ) : (
-        <></>
       )}
     </div>
   );

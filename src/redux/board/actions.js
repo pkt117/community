@@ -111,6 +111,21 @@ export const selectedBoard = (value) => {
   };
 };
 
+// 그룹 탈퇴
+export const groupLeaveAsync = (postId, uid) => async (dispatch) => {
+  await dbService.groupLeave(postId, uid);
+
+  return dispatch(getSelectedGroupAsync(postId));
+};
+
+// 앨범 추가
+export const albumAddAsync =
+  (imgFile, userInfo, postId) => async (dispatch) => {
+    await dbService.albumAdd(imgFile, userInfo, postId);
+
+    return dispatch(getSelectedGroupAsync(postId));
+  };
+
 export const myBoardLoad = (value) => {
   return {
     type: MY_BOARD_LOAD,

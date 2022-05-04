@@ -70,7 +70,9 @@ const Login = () => {
 
   return (
     <form className={styles.login}>
-      <h1 className={styles.title}>로그인</h1>
+      <h1 className={styles.title}>
+        <img src="favicon.png" className={styles.title__icon} /> group catch
+      </h1>
       <div className={styles.inputWrap}>
         <input
           ref={emailRef}
