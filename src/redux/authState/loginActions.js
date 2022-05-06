@@ -47,7 +47,7 @@ export const emailLoginAsync = (email, password) => async (dispatch) => {
       loginSuccess({
         uid: user.uid,
         email: user.email,
-        name: user.displayName,
+        name: profile.displayName,
         profileImg: profile.profileImg,
         intro: profile.intro,
         createdAt: profile.createdAt,

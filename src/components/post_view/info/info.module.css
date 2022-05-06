@@ -1,6 +1,15 @@
 @value colorGroupButton, colorGrey, colorWhite, colorLightGrey, colorDeepWhite from "common/colors.css";
 @value smallMargin, smallFontSize, xsmallFontSize ,mediumFontSize, mediumMargin, microMargin from "common/size.css";
 
+.info {
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+}
+.info::-webkit-scrollbar {
+  display: none;
+}
 .image {
   margin-top: smallMargin;
   width: 100%;

@@ -26,7 +26,7 @@ const Info = ({ postId, selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
   };
 
   return (
-    <>
+    <div className={styles.info}>
       <img src={selected.postImage} className={styles.image} />
 
       <div className={styles.contentWrap}>
@@ -134,7 +134,7 @@ const Info = ({ postId, selected, groupJoin, uid, acceptJoin, rejectJoin }) => {
         confirmCancel={confirmCancel}
         text="그룹 탈퇴 하시겠습니까?"
       />
-    </>
+    </div>
   );
 };
 export default Info;
